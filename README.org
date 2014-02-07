@@ -1,6 +1,6 @@
 * Synopsis
 
-** *Projectile Drupal* is a minor mode for working with the Drupal project in GNU Emacs.
+*Projectile Drupal* is a minor mode for working with the Drupal project in GNU Emacs.
 Internally it based on [[Projectile][https://github.com/bbatsov/projectile]].
 
 TODO: It means that you can use Projectile's commands for greping (or acking) files, run tests, switch between projects, etc.
@@ -18,9 +18,9 @@ With Projectile Drupal you are able to:
 
 *** TODO:
 
-*** Usage
+* Usage
 
-**** Hooking up with Projectile
+** Hooking up with Projectile
 
 To make it start alongside `projectile-mode`:
 
@@ -34,7 +34,7 @@ Probably you should read Projectile's [[https://github.com/bbatsov/projectile][R
 system, caching and indexing files. Although the default settings are quite
 sensible and you should be ready to go without much tweaking.
 
-**** Customizing
+** Customizing
 
 TODO:
 The mode's buffers will have the Drupal keywords higlighted. To turn it off:
@@ -50,7 +50,7 @@ If you are using [[https://github.com/capitaomorte/yasnippet][yasnippet]] and yo
 (setq projectile-drupal-expand-snippet nil)
 #+END_SRC
 
-**** Interactive commands
+* Interactive commands
 
 | Command                                   | Keybinding                                 | Description                                                                                              |
 |-------------------------------------------+--------------------------------------------+----------------------------------------------------------------------------------------------------------|
@@ -94,28 +94,27 @@ You might want to create your own keybinding for your favorite commands. For exa
 #+END_SRC
 
 
-**** Beyond
+* Beyond
 
 Consider installing other Emacs packages that can help you working specifically with Drupal projects.
 
-***** Templates
+** Templates
 
-| Extension | Alternatives                                                            |
-|-----------+-------------------------------------------------------------------------|
-| erb       | [[web-mode][https://github.com/fxbois/web-mode]], [[mmm-mode][https://github.com/purcell/mmm-mode]]  |
-| yaml      | [[yaml-mode][https://github.com/yoshiki/yaml-mode]]                                    |
+| Extension | Alternatives       |
+|-----------+--------------------|
+| erb       | [[https://github.com/fxbois/web-mode][web-mode]], [[https://github.com/purcell/mmm-mode][mmm-mode]] |
+| yaml      | [[https://github.com/yoshiki/yaml-mode][yaml-mode]]          |
 
-***** Running drush
+** Running drush
 
 Some of the Projectile Drupal functions run the drush executable.
 
-OS X users might want to look at [exec-path-from-shell](https://github.com/purcell/exec-path-from-shell).
+OS X users might want to look at [[https://github.com/purcell/exec-path-from-shell][exec-path-from-shell]].
 
-*** Miscellaneous
+* Miscellaneous
 
-
-*** [[https://github.com/eethann/emacs-behat-mink][Emacs Behat Mink Tools]]
-*** [[https://github.com/magit/magit][magit]] to interact with git.
+** [[https://github.com/eethann/emacs-behat-mink][Emacs Behat Mink Tools]]
+** [[https://github.com/magit/magit][magit]] to interact with git.
 
 * Contribution
 
