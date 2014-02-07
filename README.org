@@ -1,0 +1,135 @@
+* Synopsis
+
+** *Projectile Drupal* is a minor mode for working with the Drupal project in GNU Emacs.
+Internally it based on [[Projectile][https://github.com/bbatsov/projectile]].
+
+TODO: It means that you can use Projectile's commands for greping (or acking) files, run tests, switch between projects, etc.
+
+With Projectile Drupal you are able to:
+
+** navigate through drupal resources (modules, themes, profiles and so on)
+** TODO: run `drupal console`
+** TODO: open log files with `auto-revert-mode` on
+** TODO: see drupal keywords highlighted
+
+* Setup
+
+** Installation
+
+*** TODO:
+
+*** Usage
+
+**** Hooking up with Projectile
+
+To make it start alongside `projectile-mode`:
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'projectile-mode-hook 'projectile-drupal-on)
+#+END_SRC
+
+That will start it only if the current project is a Drupal project.
+
+Probably you should read Projectile's [[https://github.com/bbatsov/projectile][README]] on setting up the completion
+system, caching and indexing files. Although the default settings are quite
+sensible and you should be ready to go without much tweaking.
+
+**** Customizing
+
+TODO:
+The mode's buffers will have the Drupal keywords higlighted. To turn it off:
+
+#+BEGIN_SRC emacs-lisp
+(setq projectile-drupal-add-keywords nil)
+#+END_SRC
+
+TODO:
+If you are using [[https://github.com/capitaomorte/yasnippet][yasnippet]] and you open a new file it will be filled with a skeleton class. To turn it off:
+
+#+BEGIN_SRC emacs-lisp
+(setq projectile-drupal-expand-snippet nil)
+#+END_SRC
+
+**** Interactive commands
+
+| Command                                   | Keybinding                                 | Description                                                                                              |
+|-------------------------------------------+--------------------------------------------+----------------------------------------------------------------------------------------------------------|
+| projectile-drupal-find-model              | <kbd>C-c r m</kbd>                         | Find a model using `projectile-completion-system`.                                                       |
+| projectile-drupal-find-current-model      | <kbd>C-c r M</kbd>, <kbd>C-c r g m</kbd>   | Go to a model connected with the current resource.                                                       |
+| projectile-drupal-find-controller         | <kbd>C-c r c</kbd>                         | Find a controller using `projectile-completion-system`.                                                  |
+| projectile-drupal-find-current-controller | <kbd>C-c r C</kbd>, <kbd>C-c r g c</kbd>   | Go to a controller connected with the current resource.                                                  |
+| projectile-drupal-find-view               | <kbd>C-c r v</kbd>                         | Find a template or partial using `projectile-completion-system`.                                         |
+| projectile-drupal-find-current-view       | <kbd>C-c r V</kbd>, <kbd>C-c r g v</kbd>   | Go to a view connected with the current resource.                                                        |
+| projectile-drupal-find-helper             | <kbd>C-c r h</kbd>                         | Find a helper using `projectile-completion-system`.                                                      |
+| projectile-drupal-find-current-helper     | <kbd>C-c r H</kbd>, <kbd>C-c r g h</kbd>   | Go to a helper connected with the current resource.                                                      |
+| projectile-drupal-find-lib                | <kbd>C-c r l</kbd>                         | Find a lib using `projectile-completion-system`.                                                         |
+| projectile-drupal-find-spec               | <kbd>C-c r s</kbd>                         | Find a spec using `projectile-completion-system`.                                                        |
+| projectile-drupal-find-current-spec       | <kbd>C-c r S</kbd>, <kbd>C-c r g s</kbd>   | Go to a spec connected with the current resource.                                                        |
+| projectile-drupal-find-migration          | <kbd>C-c r n</kbd>                         | Find a migration using `projectile-completion-system`.                                                   |
+| projectile-drupal-find-current-migration  | <kbd>C-c r N</kbd>, <kbd>C-c r g n</kbd>   | Go to a migration connected with the current resource.                                                   |
+| projectile-drupal-find-javascript         | <kbd>C-c r j</kbd>                         | Find a javascript using `projectile-completion-system`.                                                  |
+| projectile-drupal-find-log                | <kbd>C-c r o</kbd>                         | Find a log file and enable `auto-revert-tail-mode` in its buffer.                                        |
+| projectile-drupal-find-initializer        | <kbd>C-c r i</kbd>                         | Find an initializer file using `projectile-completions-system`.                                          |
+| projectile-drupal-find-environment        | <kbd>C-c r e</kbd>                         | Find an environment file using `projectile-completions-system`.                                          |
+| projectile-drupal-find-locale             | <kbd>C-c r a</kbd>                         | Find a locale file using `projectile-completions-system`.                                                |
+| projectile-drupal-find-mailer             | <kbd>C-c r @</kbd>                         | Find a mailer file using `projectile-completions-system`.                                                |
+| projectile-drupal-find-layout             | <kbd>C-c r y</kbd>                         | Find a layout file using `projectile-completions-system`.                                                |
+| projectile-drupal-console                 | <kbd>C-c r r</kbd>                         | Run `drupal console` command in `inf-ruby` buffer.                                                       |
+| projectile-drupal-rake                    | <kbd>C-c r k</kbd>                         | Select a rake task to run using `projectile-completion-system`.                                          |
+| projectile-drupal-generate                | <kbd>C-c r t</kbd>                         | Run `drupal generate` command.                                                                           |
+| projectile-drupal-goto-file-at-point      | <kbd>C-c r RET</kbd>, <kbd>C-c r g f</kbd> | Go to a file at point. Depending on the context that might be a constant, template or partial, or a gem. |
+| projectile-drupal-goto-gemfile            | <kbd>C-c r g g</kbd>                       | Go to `Gemfile` file.                                                                                    |
+| projectile-drupal-goto-routes             | <kbd>C-c r g r</kbd>                       | Go to `config/routes.rb` file.                                                                           |
+| projectile-drupal-goto-schema             | <kbd>C-c r g h</kbd>                       | Go to `db/schema.rb` file.                                                                               |
+| projectile-drupal-goto-spec-helper        | <kbd>C-c r g p</kbd>                       | Go to `spec/spec_helper.rb` file.                                                                        |
+
+You might want to create your own keybinding for your favorite commands. For example:
+
+#+BEGIN_SRC emacs-lisp
+(define-key projectile-drupal-mode-map (kbd "s-m")   'projectile-drupal-find-model)
+(define-key projectile-drupal-mode-map (kbd "s-c")   'projectile-drupal-find-controller)
+(define-key projectile-drupal-mode-map (kbd "s-v")   'projectile-drupal-find-view)
+(define-key projectile-drupal-mode-map (kbd "s-RET") 'projectile-drupal-goto-file-at-point)
+(define-key projectile-drupal-mode-map (kbd "C-c g")  projectile-drupal-mode-goto-map)
+#+END_SRC
+
+
+**** Beyond
+
+Consider installing other Emacs packages that can help you working specifically with Drupal projects.
+
+***** Templates
+
+| Extension | Alternatives                                                            |
+|-----------+-------------------------------------------------------------------------|
+| erb       | [[web-mode][https://github.com/fxbois/web-mode]], [[mmm-mode][https://github.com/purcell/mmm-mode]]  |
+| yaml      | [[yaml-mode][https://github.com/yoshiki/yaml-mode]]                                    |
+
+***** Running drush
+
+Some of the Projectile Drupal functions run the drush executable.
+
+OS X users might want to look at [exec-path-from-shell](https://github.com/purcell/exec-path-from-shell).
+
+*** Miscellaneous
+
+
+*** [[https://github.com/eethann/emacs-behat-mink][Emacs Behat Mink Tools]]
+*** [[https://github.com/magit/magit][magit]] to interact with git.
+
+* Contribution
+
+Install [cask](https://github.com/rejeep/cask.el) if you haven't already, then:
+
+#+BEGIN_SRC sh
+$ cd /path/to/projectile-drupal
+$ cask
+#+END_SRC
+
+Run all tests with:
+
+#+BEGIN_SRC sh
+$ make test
+#+END_SRC
+
+For all of them to pass you will need the `bundle` executable in your path.
