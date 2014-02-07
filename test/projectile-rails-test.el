@@ -1,33 +1,33 @@
 (expectations
- (desc "projectile-rails-sanitize-name"
+ (desc "projectile-drupal-sanitize-name"
        (expect "name"
-	       (projectile-rails-sanitize-name ":name"))
+               (projectile-drupal-sanitize-name ":name"))
        (expect "name"
-	       (projectile-rails-sanitize-name "/name"))
+               (projectile-drupal-sanitize-name "/name"))
        (expect "path/name"
-	       (projectile-rails-sanitize-name "/path/name"))
+               (projectile-drupal-sanitize-name "/path/name"))
        (expect "name"
-	       (projectile-rails-sanitize-name "'name'"))
+               (projectile-drupal-sanitize-name "'name'"))
        (expect "name"
-	       (projectile-rails-sanitize-name "\"name\""))
+               (projectile-drupal-sanitize-name "\"name\""))
        )
- (desc "projectile-rails-declassify"
+ (desc "projectile-drupal-declassify"
        (expect "user"
-	       (projectile-rails-declassify "user"))
+               (projectile-drupal-declassify "user"))
        (expect "memberships"
-	       (projectile-rails-declassify "Memberships"))
+               (projectile-drupal-declassify "Memberships"))
        (expect "users_controller"
-	       (projectile-rails-declassify "UsersController"))
+               (projectile-drupal-declassify "UsersController"))
        (expect "admin/users_controller"
-       	       (projectile-rails-declassify "Admin::UsersController"))
+               (projectile-drupal-declassify "Admin::UsersController"))
        (expect "users/index.html.erb"
-       	       (projectile-rails-declassify "users/index.html.erb"))
+               (projectile-drupal-declassify "users/index.html.erb"))
        )
- (desc "projectile-rails-hash-keys"
+ (desc "projectile-drupal-hash-keys"
        (expect '("baz" "bar" "foo")
-	       (let ((hash (make-hash-table :test 'equal)))
-		 (puthash "foo" 1 hash)
-		 (puthash "bar" 1 hash)
-		 (puthash "baz" 1 hash)
-		 (projectile-rails-hash-keys hash))))
+               (let ((hash (make-hash-table :test 'equal)))
+                 (puthash "foo" 1 hash)
+                 (puthash "bar" 1 hash)
+                 (puthash "baz" 1 hash)
+                 (projectile-drupal-hash-keys hash))))
  )

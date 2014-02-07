@@ -1,7 +1,7 @@
 Feature: Going from a ruby file from require line
   In order to do find fast required file or gem
   As a user
-  I want to be able to run projectile-rails command and jump to the file or gem at point
+  I want to be able to run projectile-drupal command and jump to the file or gem at point
 
 Scenario: Going at: require_relative './admin/logging'
   Given file "lib/admin/logging.rb" exists
@@ -11,7 +11,7 @@ Scenario: Going at: require_relative './admin/logging'
   require_relative './admin/logging'
   """
   And I place the cursor between "log" and "ging"
-  When I run "projectile-rails-goto-file-at-point"
+  When I run "projectile-drupal-goto-file-at-point"
   Then I am in file "lib/admin/logging.rb"
 
 Scenario: Going at: require_relative 'admin/logging'
@@ -22,7 +22,7 @@ Scenario: Going at: require_relative 'admin/logging'
   require_relative 'admin/logging'
   """
   And I place the cursor between "log" and "ging"
-  When I run "projectile-rails-goto-file-at-point"
+  When I run "projectile-drupal-goto-file-at-point"
   Then I am in file "lib/admin/logging.rb"
 
 Scenario: Going to gem at line: require 'foo'
@@ -39,6 +39,5 @@ Scenario: Going to gem at line: require 'foo'
   require 'foo'
   """
   When I place the cursor between "'fo" and "o'"
-  And I run "projectile-rails-goto-file-at-point"
+  And I run "projectile-drupal-goto-file-at-point"
   Then I am in a dired buffer "vendor/foo/"
-
