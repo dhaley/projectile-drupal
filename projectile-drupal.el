@@ -1,12 +1,12 @@
 ;;; projectile-drupal.el --- Minor mode for Drupal projects based on projectile-mode
 
-;; Copyright (C) 2013 Adam Sokolnicki
+;; Copyright (C) 2014 Damon Haley
 
-;; Author:            Adam Sokolnicki <adam.sokolnicki@gmail.com>
-;; URL:               https://github.com/asok/projectile-drupal
-;; Version:           0.4.1
+;; Author:            Damon Haley <dkh@member.fsf.org>
+;; URL:               https://github.com/dhaley/projectile-drupal
+;; Version:           0.1.1
 ;; Keywords:          drupal, projectile
-;; Package-Requires:  ((projectile "1.0.0-cvs") (inflections "1.1") (inf-ruby "2.2.6") (f "0.13.0"))
+;; Package-Requires:  ((projectile "1.0.0-cvs") (inflections "1.1") (f "0.13.0"))
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -36,7 +36,6 @@
 ;;; Code:
 
 (require 'projectile)
-(require 'inf-ruby)
 (require 'inflections)
 (require 'f)
 
@@ -387,44 +386,6 @@ Returns a hash table with keys being short names and values being relative paths
     (projectile-drupal-regenerate-rake)
     (projectile-drupal-rake-tasks)))
 
-;; Shamelessly stolen from ruby-starter-kit.el:
-;; https://github.com/technomancy/emacs-starter-kit/blob/v2/modules/starter-kit-ruby.el
-(defun projectile-drupal-pcmpl-rake-tasks ()
-  "Return a list of all the rake tasks defined in the current projects."
-  (--keep it
-          (--map (if (string-match "rake \\([^ ]+\\)" it) (match-string 1 it))
-                 (split-string (projectile-drupal-rake-tasks) "[\n]"))))
-
-(defun projectile-drupal-regenerate-rake ()
-  "Generates rakes tasks file in the tmp within drupal root directory."
-  (interactive)
-  (if (file-exists-p (projectile-drupal-rake-tmp-file)) (delete-file (projectile-drupal-rake-tmp-file)))
-  (with-temp-file (projectile-drupal-rake-tmp-file)
-    (insert
-     (projectile-drupal-with-root
-      (shell-command-to-string
-       (projectile-drupal-with-preloader
-        :spring "spring rake -T"
-        :zeus "zeus rake -T"
-        :vanilla "bundle exec rake -T"))))))
-
-(defun projectile-drupal-rake (task)
-  (interactive
-   (list
-    (projectile-completing-read
-     "Rake (default: default): "
-     (projectile-drupal-pcmpl-rake-tasks))))
-  (let ((default-directory (projectile-drupal-root)))
-    (projectile-drupal-with-root
-     (compile
-      (concat
-       (projectile-drupal-with-preloader
-        :spring "spring rake "
-        :zeus "zeus rake "
-        :vanilla "bundle exec rake ")
-       (if (= 0 (length task)) "default" task))
-      'projectile-drupal-compilation-mode))))
-
 (defun projectile-drupal-root ()
   "Returns drupal root directory if this file is a part of a Drupal application else nil"
   (and
@@ -432,15 +393,15 @@ Returns a hash table with keys being short names and values being relative paths
    (file-exists-p (projectile-expand-root "config/environment.rb"))
    (projectile-project-root)))
 
-(defun projectile-drupal-console ()
-  (interactive)
-  (projectile-drupal-with-root
-   (with-current-buffer (run-ruby
-                         (projectile-drupal-with-preloader
-                          :spring "spring drupal console"
-                          :zeus "zeus console"
-                          :vanilla "bundle exec drupal console"))
-     (projectile-drupal-mode +1))))
+;; (defun projectile-drupal-console ()
+;;   (interactive)
+;;   (projectile-drupal-with-root
+;;    (with-current-buffer (run-ruby
+;;                          (projectile-drupal-with-preloader
+;;                           :spring "spring drupal console"
+;;                           :zeus "zeus console"
+;;                           :vanilla "bundle exec drupal console"))
+;;      (projectile-drupal-mode +1))))
 
 (defun projectile-drupal-expand-snippet-maybe ()
   (when (and (fboundp 'yas-expand-snippet)
