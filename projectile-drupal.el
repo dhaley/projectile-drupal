@@ -810,6 +810,224 @@
               "admin/config/media/image-styles/edit/%/effects/%/delete"))
   )
 
+(defun drush-uli-to-string ()
+  " Provide dynamically derived uri for drush uli"
+  (interactive)
+  (cd cu-drupal-site-directory)
+  (let* ((uri
+          (if (equal cu-drupal-site-name "admissions_undergraduate")
+              "ww/admissions/undergraduate"
+            (concat "ww/" cu-drupal-site-name)))
+         (kill-new (shell-command-to-string (concat
+                                             "drush --uri="
+                                             uri
+                                             " uli"))))
+    (message (concat "Visiting " uri))))
+
+(defun drush-version ()
+  (interactive)
+  (run-drush-command "--version"))
+
+(defun drush-core-status ()
+  (interactive)
+  (create-drush-buffer "core-status"))
+
+(defun drush-core-status-debug ()
+  (interactive)
+  (create-drush-buffer "core-status" "--debug"))
+
+(defun create-drush-buffer (command &rest a)
+  "drush scratchpad buffer(s)"
+  (if (locate-dominating-file default-directory "includes/bootstrap.inc")
+      (progn
+        (let*
+            ((allopt (mapconcat 'identity a " "))
+             (b-name (concat "*drush " command " " allopt "*")))
+          (setq d-buffer (get-buffer-create b-name))
+          (with-current-buffer d-buffer
+            (end-of-buffer)
+            (view-mode 1)
+            (hl-line-mode 1)
+            (let ((coding-system-for-read 'raw-text))
+              (let ((proc (apply 'start-process "drush" (current-buffer)
+                                 drupal-drush-program
+                                 command
+                                 a)))
+                (set-process-sentinel proc 'drush-msg-me))))
+          (message (concat "Starting: drush " command))))
+    (message (concat default-directory " is not a drupal project"))))
+
+(defun drush-msg-me (process event)
+  "Tell me it worked"
+  (when (= 0 (process-exit-status process))
+    (switch-to-buffer d-buffer)
+    (end-of-buffer)
+    (if (equal (substring (prin1-to-string d-buffer) 16 24) "sql-sync")
+        (progn
+          ;; (drush-disable-cu-cache)
+          (osx-say "Drush sql-sync complete. You might need to disable CU Cache"))
+      (osx-say "Drush complete"))))
+
+(defun* curr-dir-project-string (site-directory profile-dir-path)
+  "Returns current project as a string, or an error if we can'd deduce
+project"
+  (let ((dir-test-file (concat
+                        site-directory
+                        "profiles/"
+                        profile-dir-path)))
+    (catch 'error
+      (if (file-directory-p dir-test-file)
+          profile-dir-path
+        (curr-dir-project-string2 site-directory)))))
+
+(defun curr-dir-project-string2 (site-directory)
+  "Returns current project as a string, or the empty string if
+PWD is not in a project"
+  (let* ((p-dir (directory-file-name (concat site-directory "profiles/")))
+         (dirs '())
+         (profiles (directory-files p-dir nil nil t)))
+    (dolist (profile profiles)
+      (unless (member profile '("." ".." "testing" "standard" "minimal"))
+        (let ((test-file (concat p-dir "/" profile)))
+          (if (file-directory-p test-file)
+              (return profile)
+            (throw 'error "no profile")))))))
+
+(defun run-drush-command (command &rest a)
+  (if (or (locate-dominating-file default-directory
+                                  "includes/bootstrap.inc")
+          (equal command "--version"))
+      (progn
+        (let*
+            ((allopt (mapconcat 'identity a " "))
+             (output (shell-command-to-string
+                      (concat
+                       "drush "
+                       command
+                       " "
+                       allopt))))
+          (message "%s" (propertize output 'face '(:foreground
+                                                   "#dc322f")))
+          ;; (osx-say output)
+          ))
+    (message (concat default-directory " is not a drupal project"))))
+
+(defun drush-get-variable (v)
+  "prompt for variable and get its value"
+  (interactive "sEnter system variable: ")
+  (run-drush-command "vget" v))
+
+(defun drush-pm-info (v)
+  "prompt for module and get its info"
+  (interactive "sPlease list the specific module by machine name or leave blank for all: ")
+  (create-drush-buffer "pm-info" v))
+
+(defun drush-cache-clear-all ()
+  (interactive)
+  (run-drush-command "cache-clear" "all"))
+
+(defun drush-disable-cu-cache ()
+  (interactive)
+  (run-drush-command "dis" "-y" "cu_cache"))
+
+(defun drush-watchdog-show ()
+  (interactive)
+  (create-drush-buffer "watchdog-show"))
+
+(defun drush-features-enabled ()
+  (interactive)
+  (create-drush-buffer "features-list" "--status=enabled"))
+
+(defun drush-features-list ()
+  (interactive)
+  (create-drush-buffer "features-list"))
+
+(defun drush-modules-nocore ()
+  (interactive)
+  (create-drush-buffer "pm-list" "--status=enabled" "--no-core"
+                       "--type=module"))
+
+(defun drush-get-variables ()
+  (interactive)
+  (create-drush-buffer "vget"))
+
+(defun drush-up ()
+  (interactive)
+  (create-drush-buffer "up" "-n" "--pipe"))
+
+(defun drush-sql-sync (env)
+  (cond
+   ((equal env "prod")
+    (create-drush-buffer
+     "sql-sync"
+     "-y"
+     "-v"
+     cu-drupal-prod-alias
+     cu-drupal-local-alias))
+   ((equal env "stage")
+    (create-drush-buffer
+     "sql-sync"
+     "-y"
+     "-v"
+     cu-drupal-stage-alias
+     cu-drupal-local-alias))
+   ((equal env "dev")
+    (create-drush-buffer
+     "sql-sync"
+     "-y"
+     "-v"
+     cu-drupal-dev-alias
+     cu-drupal-local-alias))))
+
+(defun drush-sql-sync-prod ()
+  (interactive)
+  (drush-sql-sync "prod"))
+
+(defun drush-sql-sync-stage ()
+  (interactive)
+  (drush-sql-sync "stage"))
+
+(defun drush-sql-sync-dev ()
+  (interactive)
+  (drush-sql-sync "dev"))
+
+(defun drush-rsync (env)
+  (cond
+   ((equal env "prod")
+    (create-drush-buffer
+     "-y"
+     "-v"
+     "rsync"
+     (concat cu-drupal-prod-alias ":%files/")
+     (concat cu-drupal-local-alias ":%files/")))
+   ((equal env "stage")
+    (create-drush-buffer
+     "-y"
+     "-v"
+     "rsync"
+     (concat cu-drupal-stage-alias ":%files/")
+     (concat cu-drupal-local-alias ":%files/")))
+   ((equal env "dev")
+    (create-drush-buffer
+     "-y"
+     "-v"
+     "rsync"
+     (concat cu-drupal-dev-alias ":%files/")
+     (concat cu-drupal-local-alias ":%files/")))
+   ))
+
+(defun drush-rsync-prod ()
+  (interactive)
+  (drush-rsync "prod"))
+
+(defun drush-rsync-stage ()
+  (interactive)
+  (drush-rsync "stage"))
+
+(defun drush-rsync-dev ()
+  (interactive)
+  (drush-rsync "dev"))
+
 (defun cu-drupal-menu-browse ()
   "browse specific menu path on drupal site"
   (interactive)
@@ -968,29 +1186,27 @@
       (define-key prefix-map (kbd "b") 'projectile-drupal-find-contrib-directory)
       (define-key prefix-map (kbd "t") 'projectile-drupal-find-profile-theme-directory)
       (define-key prefix-map (kbd "p") 'projectile-drupal-find-profile-directory)
+      (define-key prefix-map (kbd "e") 'drush-uli-to-string)
+      (define-key prefix-map (kbd "v") 'drush-version)
+      ;; (define-key prefix-map (kbd "cs") 'drush-core-status)
+      ;; (define-key prefix-map (kbd "cd") 'drush-core-status-debug))
+      (define-key prefix-map (kbd "g") 'drush-get-variable)
+      (define-key prefix-map (kbd "i") 'drush-pm-info)
+      (define-key prefix-map (kbd "C") 'drush-cache-clear-all)
+      (define-key prefix-map (kbd "D") 'drush-disable-cu-cache)
+      (define-key prefix-map (kbd "w") 'drush-watchdog-show)
+      (define-key prefix-map (kbd "F") 'drush-features-enabled)
+      (define-key prefix-map (kbd "L") 'drush-features-list)
+      (define-key prefix-map (kbd "M") 'drush-modules-nocore)
+      (define-key prefix-map (kbd "V") 'drush-get-variables)
+      (define-key prefix-map (kbd "u") 'drush-up)
+      ;; (define-key prefix-map (kbd "sp") 'drush-sql-sync-prod)
+      ;; (define-key prefix-map (kbd "ss") 'drush-sql-sync-stage)
+      ;; (define-key prefix-map (kbd "sd") 'drush-sql-sync-dev)
+      ;; (define-key prefix-map (kbd "rp") 'drush-rsync-prod)
+      ;; (define-key prefix-map (kbd "rs") 'drush-rsync-stage)
+      ;; (define-key prefix-map (kbd "rd") 'drush-rsync-dev)
 
-      ;; (define-key prefix-map (kbd "m") 'projectile-drupal-find-model)
-
-      ;; (define-key prefix-map (kbd "m") 'projectile-drupal-find-model)
-      ;; (define-key prefix-map (kbd "M") 'projectile-drupal-find-current-model)
-      ;; (define-key prefix-map (kbd "c") 'projectile-drupal-find-controller)
-      ;; (define-key prefix-map (kbd "C") 'projectile-drupal-find-current-controller)
-      ;; (define-key prefix-map (kbd "v") 'projectile-drupal-find-view)
-      ;; (define-key prefix-map (kbd "V") 'projectile-drupal-find-current-view)
-      ;; (define-key prefix-map (kbd "h") 'projectile-drupal-find-helper)
-      ;; (define-key prefix-map (kbd "H") 'projectile-drupal-find-current-helper)
-      ;; (define-key prefix-map (kbd "l") 'projectile-drupal-find-lib)
-      ;; (define-key prefix-map (kbd "s") 'projectile-drupal-find-spec)
-      ;; (define-key prefix-map (kbd "S") 'projectile-drupal-find-current-spec)
-      ;; (define-key prefix-map (kbd "n") 'projectile-drupal-find-migration)
-      ;; (define-key prefix-map (kbd "N") 'projectile-drupal-find-current-migration)
-      ;; (define-key prefix-map (kbd "i") 'projectile-drupal-find-initializer)
-      ;; (define-key prefix-map (kbd "j") 'projectile-drupal-find-javascript)
-      ;; (define-key prefix-map (kbd "o") 'projectile-drupal-find-log)
-      ;; (define-key prefix-map (kbd "e") 'projectile-drupal-find-environment)
-      ;; (define-key prefix-map (kbd "a") 'projectile-drupal-find-locale)
-      ;; (define-key prefix-map (kbd "@") 'projectile-drupal-find-mailer)
-      ;; (define-key prefix-map (kbd "y") 'projectile-drupal-find-layout)
       ;; (define-key prefix-map (kbd "r") 'projectile-drupal-console)
       ;; (define-key prefix-map (kbd "t") 'projectile-drupal-generate)
       ;; (define-key prefix-map (kbd "RET") 'projectile-drupal-goto-file-at-point)
@@ -1041,6 +1257,7 @@
   :lighter " Drupal"
   (when projectile-drupal-mode
     (and projectile-drupal-expand-snippet (projectile-drupal-expand-snippet-maybe))
+    ;; specify buffer-local-variables
     (initialize_cu_drupal)
 ))
 
