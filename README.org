@@ -52,49 +52,27 @@ If you are using [[https://github.com/capitaomorte/yasnippet][yasnippet]] and yo
 
 * Interactive commands
 
-| Command                                   | Keybinding                                 | Description                                                                                              |
-|-------------------------------------------+--------------------------------------------+----------------------------------------------------------------------------------------------------------|
-| C-8 d f                                   | C-8 d f                                    |                                                                                                          |
-|                                           |                                            |                                                                                                          |
-|                                           |                                            |                                                                                                          |
-|                                           |                                            |                                                                                                          |
-|                                           |                                            |                                                                                                          |
-|                                           |                                            |                                                                                                          |
-|                                           |                                            |                                                                                                          |
-|                                           |                                            |                                                                                                          |
-|                                           |                                            |                                                                                                          |
-|                                           |                                            |                                                                                                          |
-|                                           |                                            |                                                                                                          |
-|                                           |                                            |                                                                                                          |
-|                                           |                                            |                                                                                                          |
-| projectile-drupal-find-model              | <kbd>C-8 m</kbd>                         | Find a model using `projectile-completion-system`.                                                       |
-| projectile-drupal-find-current-model      | <kbd>C-8 M</kbd>, <kbd>C-8 g m</kbd>   | Go to a model connected with the current resource.                                                       |
-| projectile-drupal-find-controller         | <kbd>C-8 c</kbd>                         | Find a controller using `projectile-completion-system`.                                                  |
-| projectile-drupal-find-current-controller | <kbd>C-8 C</kbd>, <kbd>C-8 g c</kbd>   | Go to a controller connected with the current resource.                                                  |
-| projectile-drupal-find-view               | <kbd>C-8 v</kbd>                         | Find a template or partial using `projectile-completion-system`.                                         |
-| projectile-drupal-find-current-view       | <kbd>C-8 V</kbd>, <kbd>C-8 g v</kbd>   | Go to a view connected with the current resource.                                                        |
-| projectile-drupal-find-helper             | <kbd>C-8 h</kbd>                         | Find a helper using `projectile-completion-system`.                                                      |
-| projectile-drupal-find-current-helper     | <kbd>C-8 H</kbd>, <kbd>C-8 g h</kbd>   | Go to a helper connected with the current resource.                                                      |
-| projectile-drupal-find-lib                | <kbd>C-8 l</kbd>                         | Find a lib using `projectile-completion-system`.                                                         |
-| projectile-drupal-find-spec               | <kbd>C-8 s</kbd>                         | Find a spec using `projectile-completion-system`.                                                        |
-| projectile-drupal-find-current-spec       | <kbd>C-8 S</kbd>, <kbd>C-8 g s</kbd>   | Go to a spec connected with the current resource.                                                        |
-| projectile-drupal-find-migration          | <kbd>C-8 n</kbd>                         | Find a migration using `projectile-completion-system`.                                                   |
-| projectile-drupal-find-current-migration  | <kbd>C-8 N</kbd>, <kbd>C-8 g n</kbd>   | Go to a migration connected with the current resource.                                                   |
-| projectile-drupal-find-javascript         | <kbd>C-8 j</kbd>                         | Find a javascript using `projectile-completion-system`.                                                  |
-| projectile-drupal-find-log                | <kbd>C-8 o</kbd>                         | Find a log file and enable `auto-revert-tail-mode` in its buffer.                                        |
-| projectile-drupal-find-initializer        | <kbd>C-8 i</kbd>                         | Find an initializer file using `projectile-completions-system`.                                          |
-| projectile-drupal-find-environment        | <kbd>C-8 e</kbd>                         | Find an environment file using `projectile-completions-system`.                                          |
-| projectile-drupal-find-locale             | <kbd>C-8 a</kbd>                         | Find a locale file using `projectile-completions-system`.                                                |
-| projectile-drupal-find-mailer             | <kbd>C-8 @</kbd>                         | Find a mailer file using `projectile-completions-system`.                                                |
-| projectile-drupal-find-layout             | <kbd>C-8 y</kbd>                         | Find a layout file using `projectile-completions-system`.                                                |
-| projectile-drupal-console                 | <kbd>C-8 r</kbd>                         | Run `drupal console` command in `inf-ruby` buffer.                                                       |
-| projectile-drupal-rake                    | <kbd>C-8 k</kbd>                         | Select a rake task to run using `projectile-completion-system`.                                          |
-| projectile-drupal-generate                | <kbd>C-8 t</kbd>                         | Run `drupal generate` command.                                                                           |
-| projectile-drupal-goto-file-at-point      | <kbd>C-8 RET</kbd>, <kbd>C-8 g f</kbd> | Go to a file at point. Depending on the context that might be a constant, template or partial, or a gem. |
-| projectile-drupal-goto-gemfile            | <kbd>C-8 g g</kbd>                       | Go to `Gemfile` file.                                                                                    |
-| projectile-drupal-goto-routes             | <kbd>C-8 g r</kbd>                       | Go to `config/routes.rb` file.                                                                           |
-| projectile-drupal-goto-schema             | <kbd>C-8 g h</kbd>                       | Go to `db/schema.rb` file.                                                                               |
-| projectile-drupal-goto-spec-helper        | <kbd>C-8 g p</kbd>                       | Go to `spec/spec_helper.rb` file.                                                                        |
+
+| Command                                          | Keybinding                                 | Description                                                                                              |
+|--------------------------------------------------+--------------------------------------------+----------------------------------------------------------------------------------------------------------|
+| projectile-drupal-find-readme                    | <kbd>C-c d r</kbd>                         | Go to Readme file in Drupal ROOT                                                                         |
+| projectile-drupal-find-site-directory            | <kbd>C-c d s</kbd>                         | Go to Drupal Root                                                                                        |
+| projectile-drupal-find-theme-directory           | <kbd>C-c d T</kbd>                         | Go to base theme directory                                                                               |
+| projectile-drupal-find-module-directory          | <kbd>C-c d m</kbd>                         | Go to base module directory                                                                              |
+| projectile-drupal-find-custom-directory          | <kbd>C-c d c</kbd>                         | Go to custom module directory                                                                            |
+| projectile-drupal-find-feature-directory         | <kbd>C-c d f</kbd>                         | Go to feature module directory                                                                           |
+| projectile-drupal-find-default-directory         | <kbd>C-c d d</kbd>                         | Go to default site directory                                                                             |
+| projectile-drupal-find-sites-all-directory       | <kbd>C-c d a</kbd>                         | Go to site all directory                                                                                 |
+| projectile-drupal-find-settings-file-name        | <kbd>C-c d S</kbd>                         | Go to settings.php file                                                                                  |
+| projectile-drupal-find-settings-local-file-name  | <kbd>C-c d l</kbd>                         | Go to local.settings.php file                                                                            |
+| projectile-drupal-find-contrib-directory         | <kbd>C-c d b</kbd>                         | Go to contrib mdoule directory                                                                           |
+| projectile-drupal-find-profile-theme-directory   | <kbd>C-c d t</kbd>                         | Go to profile theme directory                                                                            |
+| projectile-drupal-find-profile-directory         | <kbd>C-c d p</kbd>                         | Go to profile directory                                                                                  |
+| projectile-drupal-find-log                       | <kbd>C-c d o</kbd>                         | Find a log file and enable `auto-revert-tail-mode` in its buffer.                                        |
+| projectile-drupal-console                        | <kbd>C-c d r</kbd>                         | Run `drupal console` command in `inf-ruby` buffer.                                                       |
+| projectile-drupal-rake                           | <kbd>C-c d k</kbd>                         | Select a rake task to run using `projectile-completion-system`.                                          |
+| projectile-drupal-generate                       | <kbd>C-c d t</kbd>                         | Run `drupal generate` command.                                                                           |
+| projectile-drupal-goto-file-at-point             | <kbd>C-c d RET</kbd>, <kbd>C-c d g f</kbd> | Go to a file at point. Depending on the context that might be a constant, template or partial, or a gem. |
 
 You might want to create your own keybinding for your favorite commands. For example:
 

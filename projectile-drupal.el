@@ -145,9 +145,9 @@
 
 
   (setq
-   cu-drupal-site-directory (file-truename (locate-dominating-file
-                                            default-directory
-                                            "includes/bootstrap.inc"))
+   cu-drupal-site-directory (projectile-project-root)
+
+
    cu-drupal-readme-file-name (concat cu-drupal-site-directory "README.md")
    cu-drupal-profile-name (curr-dir-project-string
                            cu-drupal-site-directory
