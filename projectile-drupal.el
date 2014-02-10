@@ -6,7 +6,7 @@
 ;; URL:               https://github.com/dhaley/projectile-drupal
 ;; Version:           0.1.1
 ;; Keywords:          drupal, projectile
-;; Package-Requires:  ((projectile "1.0.0-cvs") (inflections "1.1") (f "0.13.0"))
+;; Package-Requires:  ((projectile "1.0.0-cvs") (f "0.13.0"))
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -36,7 +36,6 @@
 ;;; Code:
 
 (require 'projectile)
-(require 'inflections)
 (require 'f)
 
 (defgroup projectile-drupal nil
@@ -77,21 +76,6 @@
   `(let ((default-directory (projectile-drupal-root)))
      ,body-form))
 
-(defun projectile-drupal-current-resource-name ()
-  "Returns a resource name extracted from the name of the currently visiting file"
-  (let ((file-name (buffer-file-name)))
-    (if file-name
-        (singularize-string
-         (loop for re in '("app/models/\\(.+\\)\\.rb$"
-                           "app/controllers/\\(.+\\)_controller\\.rb$"
-                           "app/views/\\(.+\\)/[^/]+$"
-                           "app/helpers/\\(.+\\)_helper\\.rb$"
-                           "spec/.*/\\([a-z_]+?\\)\\(_controller\\)?_spec\\.rb$")
-               until (string-match re file-name)
-               finally return (match-string 1 file-name))))
-    )
-  )
-
 (defun projectile-drupal-list-entries (fun dir)
   (--map
    (substring it (length (concat (projectile-drupal-root) dir)))
@@ -115,8 +99,11 @@
   "Returns drupal root directory if this file is a part of a Drupal application else nil"
   (and
    (projectile-project-p)
-   (file-exists-p (projectile-expand-root "config/environment.rb"))
-   (projectile-project-root)))
+   (file-exists-p (projectile-expand-root "includes/bootstrap.inc"))
+(projectile-project-root)))
+
+
+
 
 ;; (defun projectile-drupal-console ()
 ;;   (interactive)
@@ -200,11 +187,6 @@
                      (projectile-drupal-ff partial)))
       (message "Could not recognize the template's format")
       (dired dir))))
-
-If file does not exist and ASK in not nil it will ask user to proceed."
-  (if (or (and path (file-exists-p path))
-          (and ask (yes-or-no-p (s-lex-format "File does not exists. Create a new buffer ${path} ?"))))
-      (find-file path)))
 
 (defun projectile-drupal-name-at-point ()
   (projectile-drupal-sanitize-name (symbol-name (symbol-at-point))))
@@ -301,8 +283,7 @@ If file does not exist and ASK in not nil it will ask user to proceed."
   :init-value nil
   :lighter " Drupal"
   (when projectile-drupal-mode
-    (and projectile-drupal-expand-snippet (projectile-drupal-expand-snippet-maybe))
-    (projectile-drupal-set-javascript-dirs)))
+    (and projectile-drupal-expand-snippet (projectile-drupal-expand-snippet-maybe))))
 
 ;;;###autoload
 (defun projectile-drupal-on ()
@@ -313,14 +294,6 @@ If file does not exist and ASK in not nil it will ask user to proceed."
 (defun projectile-drupal-off ()
   "Disable `projectile-drupal-mode' minor mode."
   (projectile-drupal-mode -1))
-
-(define-derived-mode projectile-drupal-compilation-mode compilation-mode "Projectile Drupal Compilation"
-  "Compilation mode used by `projectile-drupal'."
-  (add-hook 'compilation-filter-hook 'projectile-drupal-apply-ansi-color nil t))
-
-(define-derived-mode projectile-drupal-generate-mode projectile-drupal-compilation-mode "Projectile Drupal Generate"
-  "Mode for output of drupal generate."
-  (add-hook 'compilation-finish-functions 'projectile-drupal-make-buttons nil t))
 
 (provide 'projectile-drupal)
 
