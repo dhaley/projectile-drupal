@@ -112,23 +112,23 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
 
 (defun projectile-drupal-find-theme-directory ()
   (interactive)
-  (interactive)(find-file cu-drupal-theme-directory))
+  (interactive)(find-file projectile-drupal-theme-directory))
 
 (defun projectile-drupal-find-module-directory ()
   (interactive)
-  (find-file cu-drupal-module-directory))
+  (find-file projectile-drupal-module-directory))
 
 (defun projectile-drupal-find-custom-directory ()
   (interactive)
-  (find-file cu-drupal-custom-directory))
+  (find-file projectile-drupal-custom-directory))
 
 (defun projectile-drupal-find-feature-directory ()
   (interactive)
-  (find-file cu-drupal-feature-directory))
+  (find-file projectile-drupal-feature-directory))
 
 (defun projectile-drupal-find-default-directory ()
   (interactive)
-  (find-file cu-drupal-default-directory))
+  (find-file projectile-drupal-default-directory))
 
 (defun projectile-drupal-find-sites-all-directory ()
   (interactive)
@@ -136,26 +136,26 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
 
 (defun projectile-drupal-find-settings-file-name ()
   (interactive)
-  (find-file cu-drupal-settings-file-name))
+  (find-file projectile-drupal-settings-file-name))
 
 (defun projectile-drupal-find-settings-local-file-name ()
   (interactive)
   (find-file
-   cu-drupal-settings-local-file-name))
+   projectile-drupal-settings-local-file-name))
 
 (defun projectile-drupal-find-contrib-directory ()
   (interactive)
-  (find-file cu-drupal-contrib-directory))
+  (find-file projectile-drupal-contrib-directory))
 
 (defun projectile-drupal-find-profile-theme-directory ()
   (interactive)
   (find-file
-   cu-drupal-profile-theme-directory))
+   projectile-drupal-profile-theme-directory))
 
 (defun projectile-drupal-find-profile-directory ()
   (interactive)
   (find-file
-   cu-drupal-profile-directory))
+   projectile-drupal-profile-directory))
 
 (defun dkh-get-site-name ()
   "Gets site name based on dslm standard."
@@ -185,61 +185,61 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
                                                   projectile-drupal-profile-name)))
       (progn
         (setq
-         cu-drupal-profile-directory (concat
+         projectile-drupal-profile-directory (concat
                                       (projectile-project-root)
                                       "profiles/"
                                       projectile-drupal-profile-name)
-         cu-drupal-module-directory (concat
-                                     cu-drupal-profile-directory
+         projectile-drupal-module-directory (concat
+                                     projectile-drupal-profile-directory
                                      "/modules")
-         cu-drupal-theme-directory (concat
-                                    cu-drupal-profile-directory
+         projectile-drupal-theme-directory (concat
+                                    projectile-drupal-profile-directory
                                     "/themes")
-         cu-drupal-profile-theme-directory (concat
-                                            cu-drupal-profile-directory
+         projectile-drupal-profile-theme-directory (concat
+                                            projectile-drupal-profile-directory
                                             "/themes/"
                                             projectile-drupal-profile-name))
-        (setenv "8dt" cu-drupal-profile-theme-directory)
+        (setenv "8dt" projectile-drupal-profile-theme-directory)
 
 
-        (setenv "8dp" cu-drupal-profile-directory)
+        (setenv "8dp" projectile-drupal-profile-directory)
         )
     (setq
-     cu-drupal-module-directory (concat
+     projectile-drupal-module-directory (concat
                                  projectile-drupal-sites-all-directory
                                  "/modules")
-     cu-drupal-theme-directory (concat
+     projectile-drupal-theme-directory (concat
                                 projectile-drupal-sites-all-directory
                                 "/themes")))
 
   ;; set up the rest of global vars after determining profile parameters
   (setq
-   cu-drupal-feature-directory (concat
-                                cu-drupal-module-directory
+   projectile-drupal-feature-directory (concat
+                                projectile-drupal-module-directory
                                 "/features")
-   cu-drupal-contrib-directory (concat
-                                cu-drupal-module-directory
+   projectile-drupal-contrib-directory (concat
+                                projectile-drupal-module-directory
                                 "/contrib")
 
-   cu-drupal-custom-directory (concat
-                               cu-drupal-module-directory
+   projectile-drupal-custom-directory (concat
+                               projectile-drupal-module-directory
                                "/custom")
-   cu-drupal-default-directory (concat
+   projectile-drupal-default-directory (concat
                                 (projectile-project-root) "sites/default")
-   cu-drupal-settings-file-name (concat
-                                 cu-drupal-default-directory
+   projectile-drupal-settings-file-name (concat
+                                 projectile-drupal-default-directory
                                  "/settings.php")
-   cu-drupal-settings-local-file-name (concat
-                                       cu-drupal-default-directory
+   projectile-drupal-settings-local-file-name (concat
+                                       projectile-drupal-default-directory
                                        "/settings.local.php")
    ;; this is for drupal-mode's sake
    drupal-rootdir (projectile-project-root)
                                         ; let's set up drush aliases
-   cu-drupal-local-alias (concat "@cu.local-" projectile-drupal-site-name)
-   cu-drupal-dev-alias (concat "@cu.wwebdev1-" projectile-drupal-site-name)
-   cu-drupal-stage-alias (concat "@cu.wstage1-" projectile-drupal-site-name)
-   cu-drupal-test-alias (concat "@cu.wwebtest1-" projectile-drupal-site-name)
-   cu-drupal-prod-alias (concat "@cu.wweb1-" projectile-drupal-site-name))
+   projectile-drupal-local-alias (concat "@cu.local-" projectile-drupal-site-name)
+   projectile-drupal-dev-alias (concat "@cu.wwebdev1-" projectile-drupal-site-name)
+   projectile-drupal-stage-alias (concat "@cu.wstage1-" projectile-drupal-site-name)
+   projectile-drupal-test-alias (concat "@cu.wwebtest1-" projectile-drupal-site-name)
+   projectile-drupal-prod-alias (concat "@cu.wweb1-" projectile-drupal-site-name))
 
   (add-to-list 'projectile-globally-ignored-directories
                (concat
@@ -250,15 +250,15 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
   (setenv "8dr" projectile-drupal-readme-file-name)
   (setenv "8ds" (projectile-project-root))
   (setenv "DRUPAL_ROOT" (projectile-project-root))
-  (setenv "8dT" cu-drupal-theme-directory)
-  (setenv "8dm" cu-drupal-module-directory)
-  (setenv "8dc" cu-drupal-custom-directory)
-  (setenv "8df" cu-drupal-feature-directory)
-  (setenv "8db" cu-drupal-contrib-directory)
-  (setenv "8dd" cu-drupal-default-directory)
+  (setenv "8dT" projectile-drupal-theme-directory)
+  (setenv "8dm" projectile-drupal-module-directory)
+  (setenv "8dc" projectile-drupal-custom-directory)
+  (setenv "8df" projectile-drupal-feature-directory)
+  (setenv "8db" projectile-drupal-contrib-directory)
+  (setenv "8dd" projectile-drupal-default-directory)
   (setenv "8da" projectile-drupal-sites-all-directory)
-  (setenv "8dS" cu-drupal-settings-file-name)
-  (setenv "8dl" cu-drupal-settings-local-file-name)
+  (setenv "8dS" projectile-drupal-settings-file-name)
+  (setenv "8dl" projectile-drupal-settings-local-file-name)
 
   ;; browse drupal menus from emacs
   (setq
@@ -1019,22 +1019,22 @@ PWD is not in a project"
      "sql-sync"
      "-y"
      "-v"
-     cu-drupal-prod-alias
-     cu-drupal-local-alias))
+     projectile-drupal-prod-alias
+     projectile-drupal-local-alias))
    ((equal env "stage")
     (create-drush-buffer
      "sql-sync"
      "-y"
      "-v"
-     cu-drupal-stage-alias
-     cu-drupal-local-alias))
+     projectile-drupal-stage-alias
+     projectile-drupal-local-alias))
    ((equal env "dev")
     (create-drush-buffer
      "sql-sync"
      "-y"
      "-v"
-     cu-drupal-dev-alias
-     cu-drupal-local-alias))))
+     projectile-drupal-dev-alias
+     projectile-drupal-local-alias))))
 
 (defun projectile-drupal-drush-sql-sync-prod ()
   (interactive)
@@ -1055,22 +1055,22 @@ PWD is not in a project"
      "-y"
      "-v"
      "rsync"
-     (concat cu-drupal-prod-alias ":%files/")
-     (concat cu-drupal-local-alias ":%files/")))
+     (concat projectile-drupal-prod-alias ":%files/")
+     (concat projectile-drupal-local-alias ":%files/")))
    ((equal env "stage")
     (create-drush-buffer
      "-y"
      "-v"
      "rsync"
-     (concat cu-drupal-stage-alias ":%files/")
-     (concat cu-drupal-local-alias ":%files/")))
+     (concat projectile-drupal-stage-alias ":%files/")
+     (concat projectile-drupal-local-alias ":%files/")))
    ((equal env "dev")
     (create-drush-buffer
      "-y"
      "-v"
      "rsync"
-     (concat cu-drupal-dev-alias ":%files/")
-     (concat cu-drupal-local-alias ":%files/")))
+     (concat projectile-drupal-dev-alias ":%files/")
+     (concat projectile-drupal-local-alias ":%files/")))
    ))
 
 (defun projectile-drupal-drush-rsync-prod ()
@@ -1085,7 +1085,7 @@ PWD is not in a project"
   (interactive)
   (drush-rsync "dev"))
 
-(defun cu-drupal-menu-browse ()
+(defun projectile-drupal-menu-browse ()
   "browse specific menu path on drupal site"
   (interactive)
   (let ((menu (completing-read "Browse: " d7-menus)))
