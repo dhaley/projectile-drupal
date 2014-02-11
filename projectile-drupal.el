@@ -811,14 +811,7 @@
   )
 
 
-(defun choose-browser (url &rest args)
-  (interactive "sURL: ")
-  (if current-prefix-arg
-      (w3m-browse-url url)
-    (let ((browse-url-browser-function 'browse-url-default-macosx-browser))
-      (browse-url url))))
-
-(defun choose-cu-site (env site)
+(defun projectile-drupal-choose-cu-site (env site)
   "env & URL"
   (cond
    ((equal env "prod")
@@ -831,27 +824,27 @@
    ((equal env "test")
     (browse-url (concat "http://www-test.colorado.edu/" site)))))
 
-    (defun choose-cu-site-prod (site)
-      (interactive "sSite: ")
-      (choose-cu-site "prod" site))
+(defun projectile-drupal-choose-cu-site-prod (site)
+  (interactive "sSite: ")
+  (projectile-drupal-choose-cu-site "prod" site))
 
 
-    (defun choose-cu-site-stage (site)
-      (interactive "sSite: ")
-      (choose-cu-site "stage" site))
+(defun projectile-drupal-choose-cu-site-stage (site)
+  (interactive "sSite: ")
+  (projectile-drupal-choose-cu-site "stage" site))
 
 
-    (defun choose-cu-site-dev (site)
-      (interactive "sSite: ")
-      (choose-cu-site "dev" site))
+(defun projectile-drupal-choose-cu-site-dev (site)
+  (interactive "sSite: ")
+  (projectile-drupal-choose-cu-site "dev" site))
 
 
-    (defun choose-cu-site-test (site)
-      (interactive "sSite: ")
-      (choose-cu-site "test" site))
+(defun projectile-drupal-choose-cu-site-test (site)
+  (interactive "sSite: ")
+  (projectile-drupal-choose-cu-site "test" site))
 
 
-(defun drush-uli-to-string ()
+(defun projectile-drupal-drush-uli-to-string ()
   " Provide dynamically derived uri for drush uli"
   (interactive)
   (cd cu-drupal-site-directory)
@@ -865,7 +858,7 @@
                                              " uli"))))
     (message (concat "Visiting " uri))))
 
-(defun drush-version ()
+(defun projectile-drupal-drush-version ()
   (interactive)
   (run-drush-command "--version"))
 
@@ -1209,8 +1202,8 @@ PWD is not in a project"
       (define-key map (kbd "b") 'projectile-drupal-find-contrib-directory)
       (define-key map (kbd "t") 'projectile-drupal-find-profile-theme-directory)
       (define-key map (kbd "p") 'projectile-drupal-find-profile-directory)
-      (define-key map (kbd "e") 'drush-uli-to-string)
-      (define-key map (kbd "v") 'drush-version)
+      (define-key map (kbd "e") 'projectile-drupal-drush-uli-to-string)
+      (define-key map (kbd "v") 'projectile-drupal-projectile-drupal-drush-version)
 
     map)
   "A goto map for `projectile-drupal-mode'."
@@ -1237,10 +1230,10 @@ PWD is not in a project"
       (define-key prefix-map (kbd "rp") 'drush-rsync-prod)
       (define-key prefix-map (kbd "rs") 'drush-rsync-stage)
       (define-key prefix-map (kbd "rd") 'drush-rsync-dev)
-      (define-key prefix-map (kbd "cp") 'choose-cu-site-prod)
-      (define-key prefix-map (kbd "cs") 'choose-cu-site-stage)
-      (define-key prefix-map (kbd "cd") 'choose-cu-site-dev)
-      (define-key prefix-map (kbd "ct") 'choose-cu-site-test)
+      (define-key prefix-map (kbd "cp") 'projectile-drupal-choose-cu-site-prod)
+      (define-key prefix-map (kbd "cs") 'projectile-drupal-choose-cu-site-stage)
+      (define-key prefix-map (kbd "cd") 'projectile-drupal-choose-cu-site-dev)
+      (define-key prefix-map (kbd "ct") 'projectile-drupal-choose-cu-site-test)
       (define-key prefix-map (kbd "d") projectile-drupal-mode-goto-map)
       (define-key map projectile-drupal-keymap-prefix prefix-map))
     map)
