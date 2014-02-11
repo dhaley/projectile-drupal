@@ -87,11 +87,13 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
 
 (make-variable-buffer-local
  (defvar projectile-drupal-readme-file-name
-   "Full path of README.md file in Drupal Root"))
+   "Full path of README.md file in Drupal Root."
+   ))
 
 (make-variable-buffer-local
  (defvar projectile-drupal-profile-name "standard"
-   "The Drupal install profile name"))
+   "The Drupal install profile name. `drush vget profile'."
+   ))
 
 (make-variable-buffer-local
  (defvar projectile-drupal-sites-all-directory
@@ -179,9 +181,8 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
          (path (split-string project-root-dir "/")))     ; path as list
               (car (last (nbutlast path 1)))))
 
-(defun projectile-drupal-initialize-drupal ()
+(defun projectile-drupal-setup ()
   "Sets up local and global project variables "
-  (interactive)
 
   (setq projectile-drupal-site-name (funcall projectile-drupal-site-name-function))
 
@@ -1319,7 +1320,7 @@ PWD is not in a project"
   (when projectile-drupal-mode
     (and projectile-drupal-expand-snippet (projectile-drupal-expand-snippet-maybe))
     ;; specify buffer-local-variables
-    (projectile-drupal-initialize-drupal)
+    (projectile-drupal-setup)
 ))
 
 ;;;###autoload
