@@ -56,11 +56,15 @@
   :group 'projectile-drupal
   :type 'string)
 
-(defcustom projectile-drupal-javascript-dirs
-  '("app/assets/javascripts/" "lib/assets/javascripts/" "public/javascripts/")
-  "The list directories to for javascript files in."
-  :group 'projectile-drupal
-  :type '(repeat stirng))
+(defcustom projectile-drupal-site-name-function
+  'projectile-drupal-site-name
+  "Function to set projectile-drupal-site-name.
+This is used by the `projectile-drupal-drush-uli-to-string', `', and
+`' commands."
+  :type '(choice
+          (function-item :tag "default" :value  browse-url-w3)
+          (function :tag "Your own function"))
+  :group 'projectile-drupal)
 
 (defcustom projectile-drupal-expand-snippet t
   "If not nil newly created buffers will be pre-filled with class skeleton.")
@@ -132,17 +136,18 @@
   (find-file
    cu-drupal-profile-directory))
 
+(defun dkh-get-site-name ()
+  "Gets site name based on dslm standard."
+  (let* ((project-root-dir (locate-dominating-file default-directory
+                                                   "current"))
+         (path (split-string project-root-dir "/")))     ; path as list
+              (car (last (nbutlast path 1)))))
+
 (defun projectile-drupal-initialize-drupal ()
   "Sets up local and global project variables "
   (interactive)
 
-  (let* ((project-root-dir (locate-dominating-file default-directory
-                                                   "current"))
-         (path (split-string project-root-dir "/")))     ; path as list
-    (setq projectile-drupal-site-name          (car (last (nbutlast path 1)))))
-
-
-
+  (setq projectile-drupal-site-name (funcall projectile-drupal-site-name-function))
 
   (setq
    cu-drupal-site-directory (projectile-project-root)
