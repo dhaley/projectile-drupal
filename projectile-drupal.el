@@ -87,11 +87,16 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
 
 (make-variable-buffer-local
  (defvar projectile-drupal-readme-file-name
-   "The README file in Drupal Root"))
+   "Full path of README.md file in Drupal Root"))
 
 (make-variable-buffer-local
  (defvar projectile-drupal-profile-name "standard"
    "The Drupal install profile name"))
+
+(make-variable-buffer-local
+ (defvar projectile-drupal-sites-all-directory
+   "Full path of Drupal's sites/all directory"))
+
 
 (defun projectile-drupal-site-name-default-function ()
   "My Drupal Site"
@@ -127,7 +132,7 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
 
 (defun projectile-drupal-find-sites-all-directory ()
   (interactive)
-  (find-file cu-drupal-sites-all-directory))
+  (find-file projectile-drupal-sites-all-directory))
 
 (defun projectile-drupal-find-settings-file-name ()
   (interactive)
@@ -170,7 +175,7 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
    projectile-drupal-profile-name (curr-dir-project-string
                            (projectile-project-root)
                            projectile-drupal-site-name)
-   cu-drupal-sites-all-directory (concat
+   projectile-drupal-sites-all-directory (concat
                                   (projectile-project-root)
                                   "sites/all"))
   ;; if there's a profile dir
@@ -201,10 +206,10 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
         )
     (setq
      cu-drupal-module-directory (concat
-                                 cu-drupal-sites-all-directory
+                                 projectile-drupal-sites-all-directory
                                  "/modules")
      cu-drupal-theme-directory (concat
-                                cu-drupal-sites-all-directory
+                                projectile-drupal-sites-all-directory
                                 "/themes")))
 
   ;; set up the rest of global vars after determining profile parameters
@@ -251,7 +256,7 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
   (setenv "8df" cu-drupal-feature-directory)
   (setenv "8db" cu-drupal-contrib-directory)
   (setenv "8dd" cu-drupal-default-directory)
-  (setenv "8da" cu-drupal-sites-all-directory)
+  (setenv "8da" projectile-drupal-sites-all-directory)
   (setenv "8dS" cu-drupal-settings-file-name)
   (setenv "8dl" cu-drupal-settings-local-file-name)
 
