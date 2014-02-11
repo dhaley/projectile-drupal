@@ -97,6 +97,21 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
  (defvar projectile-drupal-sites-all-directory
    "Full path of Drupal's sites/all directory"))
 
+(make-variable-buffer-local
+ (defvar projectile-drupal-profile-directory
+   "Full path of Drupal's install profile directory"))
+
+(make-variable-buffer-local
+ (defvar projectile-drupal-module-directory
+   "Full path of Drupal's module directory"))
+
+(make-variable-buffer-local
+ (defvar projectile-drupal-theme-directory
+   "Full path of Drupal's themes directory"))
+
+(make-variable-buffer-local
+ (defvar projectile-drupal-default-theme-directory
+   "Full path of Drupal's theme_default"))
 
 (defun projectile-drupal-site-name-default-function ()
   "My Drupal Site"
@@ -150,7 +165,7 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
 (defun projectile-drupal-find-profile-theme-directory ()
   (interactive)
   (find-file
-   projectile-drupal-profile-theme-directory))
+   projectile-drupal-default-theme-directory))
 
 (defun projectile-drupal-find-profile-directory ()
   (interactive)
@@ -195,11 +210,11 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
          projectile-drupal-theme-directory (concat
                                     projectile-drupal-profile-directory
                                     "/themes")
-         projectile-drupal-profile-theme-directory (concat
+         projectile-drupal-default-theme-directory (concat
                                             projectile-drupal-profile-directory
                                             "/themes/"
                                             projectile-drupal-profile-name))
-        (setenv "8dt" projectile-drupal-profile-theme-directory)
+        (setenv "8dt" projectile-drupal-default-theme-directory)
 
 
         (setenv "8dp" projectile-drupal-profile-directory)
