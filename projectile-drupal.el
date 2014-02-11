@@ -68,7 +68,7 @@
 (defcustom projectile-drupal-add-keywords t
   "If not nil the drupal keywords will be font locked in the mode's bufffers.")
 
-(defcustom projectile-drupal-keymap-prefix (kbd "C-c d")
+(defcustom projectile-drupal-keymap-prefix (kbd "C-8")
   "`projectile-drupal-mode' keymap prefix."
   :group 'projectile-drupal
   :type 'string)
@@ -1237,7 +1237,11 @@ PWD is not in a project"
       (define-key prefix-map (kbd "rp") 'drush-rsync-prod)
       (define-key prefix-map (kbd "rs") 'drush-rsync-stage)
       (define-key prefix-map (kbd "rd") 'drush-rsync-dev)
-      (define-key prefix-map (kbd "g") projectile-drupal-mode-goto-map)
+      (define-key prefix-map (kbd "cp") 'choose-cu-site-prod)
+      (define-key prefix-map (kbd "cs") 'choose-cu-site-stage)
+      (define-key prefix-map (kbd "cd") 'choose-cu-site-dev)
+      (define-key prefix-map (kbd "ct") 'choose-cu-site-test)
+      (define-key prefix-map (kbd "d") projectile-drupal-mode-goto-map)
       (define-key map projectile-drupal-keymap-prefix prefix-map))
     map)
   "Keymap for `projectile-drupal-mode'.")
