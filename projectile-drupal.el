@@ -132,7 +132,7 @@
   (find-file
    cu-drupal-profile-directory))
 
-(defun initialize_drupal ()
+(defun projectile-drupal-initialize-drupal ()
   "Sets up local and global project variables "
   (interactive)
 
@@ -1288,7 +1288,7 @@ PWD is not in a project"
   (when projectile-drupal-mode
     (and projectile-drupal-expand-snippet (projectile-drupal-expand-snippet-maybe))
     ;; specify buffer-local-variables
-    (initialize_drupal)
+    (projectile-drupal-initialize-drupal)
 ))
 
 ;;;###autoload
