@@ -95,7 +95,7 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
 
 (defun projectile-drupal-find-site-directory ()
   (interactive)
-  (interactive)(find-file cu-drupal-site-directory))
+  (interactive)(find-file (projectile-project-root)))
 
 (defun projectile-drupal-find-theme-directory ()
   (interactive)
@@ -158,25 +158,22 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
   (setq projectile-drupal-site-name (funcall projectile-drupal-site-name-function))
 
   (setq
-   cu-drupal-site-directory (projectile-project-root)
-
-
-   cu-drupal-readme-file-name (concat cu-drupal-site-directory "README.md")
+   cu-drupal-readme-file-name (concat (projectile-project-root) "README.md")
    cu-drupal-profile-name (curr-dir-project-string
-                           cu-drupal-site-directory
+                           (projectile-project-root)
                            projectile-drupal-site-name)
    cu-drupal-sites-all-directory (concat
-                                  cu-drupal-site-directory
+                                  (projectile-project-root)
                                   "sites/all"))
   ;; if there's a profile dir
   (if (and cu-drupal-profile-name (file-exists-p (concat
-                                                  cu-drupal-site-directory
+                                                  (projectile-project-root)
                                                   "profiles/"
                                                   cu-drupal-profile-name)))
       (progn
         (setq
          cu-drupal-profile-directory (concat
-                                      cu-drupal-site-directory
+                                      (projectile-project-root)
                                       "profiles/"
                                       cu-drupal-profile-name)
          cu-drupal-module-directory (concat
@@ -215,7 +212,7 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
                                cu-drupal-module-directory
                                "/custom")
    cu-drupal-default-directory (concat
-                                cu-drupal-site-directory "sites/default")
+                                (projectile-project-root) "sites/default")
    cu-drupal-settings-file-name (concat
                                  cu-drupal-default-directory
                                  "/settings.php")
@@ -223,7 +220,7 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
                                        cu-drupal-default-directory
                                        "/settings.local.php")
    ;; this is for drupal-mode's sake
-   drupal-rootdir cu-drupal-site-directory
+   drupal-rootdir (projectile-project-root)
                                         ; let's set up drush aliases
    cu-drupal-local-alias (concat "@cu.local-" projectile-drupal-site-name)
    cu-drupal-dev-alias (concat "@cu.wwebdev1-" projectile-drupal-site-name)
@@ -238,8 +235,8 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
                 "/modules/contrib"))
 
   (setenv "8dr" cu-drupal-readme-file-name)
-  (setenv "8ds" cu-drupal-site-directory)
-  (setenv "DRUPAL_ROOT" cu-drupal-site-directory)
+  (setenv "8ds" (projectile-project-root))
+  (setenv "DRUPAL_ROOT" (projectile-project-root))
   (setenv "8dT" cu-drupal-theme-directory)
   (setenv "8dm" cu-drupal-module-directory)
   (setenv "8dc" cu-drupal-custom-directory)
@@ -860,7 +857,7 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
 (defun projectile-drupal-drush-uli-to-string ()
   " Provide dynamically derived uri for drush uli"
   (interactive)
-  (cd cu-drupal-site-directory)
+  (cd (projectile-project-root))
   (let* ((uri
           (if (equal projectile-drupal-site-name "admissions_undergraduate")
               "ww/admissions/undergraduate"
