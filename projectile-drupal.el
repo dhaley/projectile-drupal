@@ -810,6 +810,47 @@
               "admin/config/media/image-styles/edit/%/effects/%/delete"))
   )
 
+
+(defun choose-browser (url &rest args)
+  (interactive "sURL: ")
+  (if current-prefix-arg
+      (w3m-browse-url url)
+    (let ((browse-url-browser-function 'browse-url-default-macosx-browser))
+      (browse-url url))))
+
+(defun choose-cu-site (env site)
+  "env & URL"
+  (cond
+   ((equal env "prod")
+    (browse-url (concat "http://www.colorado.edu/" site)))
+   ((equal env "stage"))
+   ((equal env "stage")
+    (browse-url (concat "http://www-stage.colorado.edu/" site)))
+   ((equal env "dev")
+    (browse-url (concat "http://www-dev.colorado.edu/" site)))
+   ((equal env "test")
+    (browse-url (concat "http://www-test.colorado.edu/" site)))))
+
+    (defun choose-cu-site-prod (site)
+      (interactive "sSite: ")
+      (choose-cu-site "prod" site))
+
+
+    (defun choose-cu-site-stage (site)
+      (interactive "sSite: ")
+      (choose-cu-site "stage" site))
+
+
+    (defun choose-cu-site-dev (site)
+      (interactive "sSite: ")
+      (choose-cu-site "dev" site))
+
+
+    (defun choose-cu-site-test (site)
+      (interactive "sSite: ")
+      (choose-cu-site "test" site))
+
+
 (defun drush-uli-to-string ()
   " Provide dynamically derived uri for drush uli"
   (interactive)
