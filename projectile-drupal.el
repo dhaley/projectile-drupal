@@ -139,7 +139,7 @@
   (let* ((project-root-dir (locate-dominating-file default-directory
                                                    "current"))
          (path (split-string project-root-dir "/")))     ; path as list
-    (setq cu-drupal-site-name          (car (last (nbutlast path 1)))))
+    (setq projectile-drupal-site-name          (car (last (nbutlast path 1)))))
 
 
 
@@ -151,7 +151,7 @@
    cu-drupal-readme-file-name (concat cu-drupal-site-directory "README.md")
    cu-drupal-profile-name (curr-dir-project-string
                            cu-drupal-site-directory
-                           cu-drupal-site-name)
+                           projectile-drupal-site-name)
    cu-drupal-sites-all-directory (concat
                                   cu-drupal-site-directory
                                   "sites/all"))
@@ -212,11 +212,11 @@
    ;; this is for drupal-mode's sake
    drupal-rootdir cu-drupal-site-directory
                                         ; let's set up drush aliases
-   cu-drupal-local-alias (concat "@cu.local-" cu-drupal-site-name)
-   cu-drupal-dev-alias (concat "@cu.wwebdev1-" cu-drupal-site-name)
-   cu-drupal-stage-alias (concat "@cu.wstage1-" cu-drupal-site-name)
-   cu-drupal-test-alias (concat "@cu.wwebtest1-" cu-drupal-site-name)
-   cu-drupal-prod-alias (concat "@cu.wweb1-" cu-drupal-site-name))
+   cu-drupal-local-alias (concat "@cu.local-" projectile-drupal-site-name)
+   cu-drupal-dev-alias (concat "@cu.wwebdev1-" projectile-drupal-site-name)
+   cu-drupal-stage-alias (concat "@cu.wstage1-" projectile-drupal-site-name)
+   cu-drupal-test-alias (concat "@cu.wwebtest1-" projectile-drupal-site-name)
+   cu-drupal-prod-alias (concat "@cu.wweb1-" projectile-drupal-site-name))
 
   (add-to-list 'projectile-globally-ignored-directories
                (concat
@@ -239,7 +239,7 @@
 
   ;; browse drupal menus from emacs
   (setq
-   base_url (concat "http://ww/" cu-drupal-site-name)
+   base_url (concat "http://ww/" projectile-drupal-site-name)
    d7-menus '("admin" "batch" "gsearch" "home" "navigation404" "node"
               "rss.xml" "shortcodes" "user" "block/%" "degree/%" "media/%" "node/%"
               "overlay-ajax/%" "user/%" "wysiwyg/%" "about-us/fast-facts"
@@ -849,9 +849,9 @@
   (interactive)
   (cd cu-drupal-site-directory)
   (let* ((uri
-          (if (equal cu-drupal-site-name "admissions_undergraduate")
+          (if (equal projectile-drupal-site-name "admissions_undergraduate")
               "ww/admissions/undergraduate"
-            (concat "ww/" cu-drupal-site-name)))
+            (concat "ww/" projectile-drupal-site-name)))
          (kill-new (shell-command-to-string (concat
                                              "drush --uri="
                                              uri
