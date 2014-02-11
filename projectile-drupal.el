@@ -1209,6 +1209,8 @@ PWD is not in a project"
       (define-key map (kbd "b") 'projectile-drupal-find-contrib-directory)
       (define-key map (kbd "t") 'projectile-drupal-find-profile-theme-directory)
       (define-key map (kbd "p") 'projectile-drupal-find-profile-directory)
+      (define-key map (kbd "e") 'drush-uli-to-string)
+      (define-key map (kbd "v") 'drush-version)
 
     map)
   "A goto map for `projectile-drupal-mode'."
@@ -1217,8 +1219,6 @@ PWD is not in a project"
 (defvar projectile-drupal-mode-map
   (let ((map (make-sparse-keymap)))
     (let ((prefix-map (make-sparse-keymap)))
-      (define-key prefix-map (kbd "e") 'drush-uli-to-string)
-      (define-key prefix-map (kbd "v") 'drush-version)
       (define-key prefix-map (kbd "cs") 'drush-core-status)
       (define-key prefix-map (kbd "cd") 'drush-core-status-debug)
       (define-key prefix-map (kbd "gv") 'drush-get-variable)
