@@ -62,7 +62,7 @@
 This is used by the `projectile-drupal-drush-uli-to-string', `', and
 `' commands."
   :type '(choice
-          (function-item :tag "default" :value  browse-url-w3)
+          (function-item :tag "default" :value  projectile-drupal-site-name-default-function)
           (function :tag "Your own function"))
   :group 'projectile-drupal)
 
@@ -80,6 +80,14 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
 (defmacro projectile-drupal-with-root (body-form)
   `(let ((default-directory (projectile-drupal-root)))
      ,body-form))
+
+(make-variable-buffer-local
+ (defvar projectile-drupal-site-name "My Drupal Site"
+   "Site name used for drush --uli function + others"))
+
+(defun projectile-drupal-site-name-default-function ()
+  "My Drupal Site"
+  )
 
 (defun projectile-drupal-find-readme ()
   (interactive)
