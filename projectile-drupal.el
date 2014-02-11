@@ -862,11 +862,11 @@
   (interactive)
   (run-drush-command "--version"))
 
-(defun drush-core-status ()
+(defun projectile-drupal-drush-core-status ()
   (interactive)
   (create-drush-buffer "core-status"))
 
-(defun drush-core-status-debug ()
+(defun projectile-drupal-drush-core-status-debug ()
   (interactive)
   (create-drush-buffer "core-status" "--debug"))
 
@@ -898,7 +898,7 @@
     (end-of-buffer)
     (if (equal (substring (prin1-to-string d-buffer) 16 24) "sql-sync")
         (progn
-          ;; (drush-disable-cu-cache)
+          ;; (projectile-drupal-drush-disable-cu-cache)
           (osx-say "Drush sql-sync complete. You might need to disable CU Cache"))
       (osx-say "Drush complete"))))
 
@@ -946,46 +946,46 @@ PWD is not in a project"
           ))
     (message (concat default-directory " is not a drupal project"))))
 
-(defun drush-get-variable (v)
+(defun projectile-drupal-drush-get-variable (v)
   "prompt for variable and get its value"
   (interactive "sEnter system variable: ")
   (run-drush-command "vget" v))
 
-(defun drush-pm-info (v)
+(defun projectile-drupal-drush-pm-info (v)
   "prompt for module and get its info"
   (interactive "sPlease list the specific module by machine name or leave blank for all: ")
   (create-drush-buffer "pm-info" v))
 
-(defun drush-cache-clear-all ()
+(defun projectile-drupal-drush-cache-clear-all ()
   (interactive)
   (run-drush-command "cache-clear" "all"))
 
-(defun drush-disable-cu-cache ()
+(defun projectile-drupal-drush-disable-cu-cache ()
   (interactive)
   (run-drush-command "dis" "-y" "cu_cache"))
 
-(defun drush-watchdog-show ()
+(defun projectile-drupal-drush-watchdog-show ()
   (interactive)
   (create-drush-buffer "watchdog-show"))
 
-(defun drush-features-enabled ()
+(defun projectile-drupal-drush-features-enabled ()
   (interactive)
   (create-drush-buffer "features-list" "--status=enabled"))
 
-(defun drush-features-list ()
+(defun projectile-drupal-drush-features-list ()
   (interactive)
   (create-drush-buffer "features-list"))
 
-(defun drush-modules-nocore ()
+(defun projectile-drupal-drush-modules-nocore ()
   (interactive)
   (create-drush-buffer "pm-list" "--status=enabled" "--no-core"
                        "--type=module"))
 
-(defun drush-get-variables ()
+(defun projectile-drupal-drush-get-variables ()
   (interactive)
   (create-drush-buffer "vget"))
 
-(defun drush-up ()
+(defun projectile-drupal-drush-up ()
   (interactive)
   (create-drush-buffer "up" "-n" "--pipe"))
 
@@ -1013,15 +1013,15 @@ PWD is not in a project"
      cu-drupal-dev-alias
      cu-drupal-local-alias))))
 
-(defun drush-sql-sync-prod ()
+(defun projectile-drupal-drush-sql-sync-prod ()
   (interactive)
   (drush-sql-sync "prod"))
 
-(defun drush-sql-sync-stage ()
+(defun projectile-drupal-drush-sql-sync-stage ()
   (interactive)
   (drush-sql-sync "stage"))
 
-(defun drush-sql-sync-dev ()
+(defun projectile-drupal-drush-sql-sync-dev ()
   (interactive)
   (drush-sql-sync "dev"))
 
@@ -1050,15 +1050,15 @@ PWD is not in a project"
      (concat cu-drupal-local-alias ":%files/")))
    ))
 
-(defun drush-rsync-prod ()
+(defun projectile-drupal-drush-rsync-prod ()
   (interactive)
   (drush-rsync "prod"))
 
-(defun drush-rsync-stage ()
+(defun projectile-drupal-drush-rsync-stage ()
   (interactive)
   (drush-rsync "stage"))
 
-(defun drush-rsync-dev ()
+(defun projectile-drupal-drush-rsync-dev ()
   (interactive)
   (drush-rsync "dev"))
 
@@ -1212,24 +1212,24 @@ PWD is not in a project"
 (defvar projectile-drupal-mode-map
   (let ((map (make-sparse-keymap)))
     (let ((prefix-map (make-sparse-keymap)))
-      (define-key prefix-map (kbd "cs") 'drush-core-status)
-      (define-key prefix-map (kbd "cd") 'drush-core-status-debug)
-      (define-key prefix-map (kbd "gv") 'drush-get-variable)
-      (define-key prefix-map (kbd "pi") 'drush-pm-info)
-      (define-key prefix-map (kbd "cc") 'drush-cache-clear-all)
-      (define-key prefix-map (kbd "dc") 'drush-disable-cu-cache)
-      (define-key prefix-map (kbd "ws") 'drush-watchdog-show)
-      (define-key prefix-map (kbd "fe") 'drush-features-enabled)
-      (define-key prefix-map (kbd "fl") 'drush-features-list)
-      (define-key prefix-map (kbd "mn") 'drush-modules-nocore)
-      (define-key prefix-map (kbd "gV") 'drush-get-variables)
-      (define-key prefix-map (kbd "up") 'drush-up)
-      (define-key prefix-map (kbd "sp") 'drush-sql-sync-prod)
-      (define-key prefix-map (kbd "ss") 'drush-sql-sync-stage)
-      (define-key prefix-map (kbd "sd") 'drush-sql-sync-dev)
-      (define-key prefix-map (kbd "rp") 'drush-rsync-prod)
-      (define-key prefix-map (kbd "rs") 'drush-rsync-stage)
-      (define-key prefix-map (kbd "rd") 'drush-rsync-dev)
+      (define-key prefix-map (kbd "cs") 'projectile-drupal-drush-core-status)
+      (define-key prefix-map (kbd "cd") 'projectile-drupal-drush-core-status-debug)
+      (define-key prefix-map (kbd "gv") 'projectile-drupal-drush-get-variable)
+      (define-key prefix-map (kbd "pi") 'projectile-drupal-drush-pm-info)
+      (define-key prefix-map (kbd "cc") 'projectile-drupal-drush-cache-clear-all)
+      (define-key prefix-map (kbd "dc") 'projectile-drupal-drush-disable-cu-cache)
+      (define-key prefix-map (kbd "ws") 'projectile-drupal-drush-watchdog-show)
+      (define-key prefix-map (kbd "fe") 'projectile-drupal-drush-features-enabled)
+      (define-key prefix-map (kbd "fl") 'projectile-drupal-drush-features-list)
+      (define-key prefix-map (kbd "mn") 'projectile-drupal-drush-modules-nocore)
+      (define-key prefix-map (kbd "gV") 'projectile-drupal-drush-get-variables)
+      (define-key prefix-map (kbd "up") 'projectile-drupal-drush-up)
+      (define-key prefix-map (kbd "sp") 'projectile-drupal-drush-sql-sync-prod)
+      (define-key prefix-map (kbd "ss") 'projectile-drupal-drush-sql-sync-stage)
+      (define-key prefix-map (kbd "sd") 'projectile-drupal-drush-sql-sync-dev)
+      (define-key prefix-map (kbd "rp") 'projectile-drupal-drush-rsync-prod)
+      (define-key prefix-map (kbd "rs") 'projectile-drupal-drush-rsync-stage)
+      (define-key prefix-map (kbd "rd") 'projectile-drupal-drush-rsync-dev)
       (define-key prefix-map (kbd "cp") 'projectile-drupal-choose-cu-site-prod)
       (define-key prefix-map (kbd "cs") 'projectile-drupal-choose-cu-site-stage)
       (define-key prefix-map (kbd "cd") 'projectile-drupal-choose-cu-site-dev)
