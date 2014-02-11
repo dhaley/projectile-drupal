@@ -115,6 +115,22 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
  (defvar projectile-drupal-default-theme-directory
    "Full path of Drupal's theme_default"))
 
+(make-variable-buffer-local
+ (defvar projectile-drupal-custom-directory
+   "Full path of Drupal's custom module directory."))
+
+(make-variable-buffer-local
+ (defvar projectile-drupal-default-directory
+   "Full path of Drupal's sites/default directory."))
+
+(make-variable-buffer-local
+ (defvar projectile-drupal-settings-file-name
+   "Full path of Drupal's sites/default/settings.php file"))
+
+(make-variable-buffer-local
+ (defvar projectile-drupal-settings-local-file-name
+   "Full path of Drupal's sites/default/settings.local.php file"))
+
 (defun projectile-drupal-site-name-default-function ()
   "My Drupal Site"
   )
@@ -248,8 +264,6 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
    projectile-drupal-settings-local-file-name (concat
                                        projectile-drupal-default-directory
                                        "/settings.local.php")
-   ;; this is for drupal-mode's sake
-   drupal-rootdir (projectile-project-root)
                                         ; let's set up drush aliases
    projectile-drupal-local-alias (concat "@cu.local-" projectile-drupal-site-name)
    projectile-drupal-dev-alias (concat "@cu.wwebdev1-" projectile-drupal-site-name)
