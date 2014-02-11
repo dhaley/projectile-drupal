@@ -85,13 +85,21 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
  (defvar projectile-drupal-site-name "My Drupal Site"
    "Site name used for drush --uli function + others"))
 
+(make-variable-buffer-local
+ (defvar projectile-drupal-readme-file-name
+   "The README file in Drupal Root"))
+
+(make-variable-buffer-local
+ (defvar projectile-drupal-profile-name "standard"
+   "The Drupal install profile name"))
+
 (defun projectile-drupal-site-name-default-function ()
   "My Drupal Site"
   )
 
 (defun projectile-drupal-find-readme ()
   (interactive)
-  (find-file cu-drupal-readme-file-name))
+  (find-file projectile-drupal-readme-file-name))
 
 (defun projectile-drupal-find-site-directory ()
   (interactive)
@@ -158,24 +166,24 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
   (setq projectile-drupal-site-name (funcall projectile-drupal-site-name-function))
 
   (setq
-   cu-drupal-readme-file-name (concat (projectile-project-root) "README.md")
-   cu-drupal-profile-name (curr-dir-project-string
+   projectile-drupal-readme-file-name (concat (projectile-project-root) "README.md")
+   projectile-drupal-profile-name (curr-dir-project-string
                            (projectile-project-root)
                            projectile-drupal-site-name)
    cu-drupal-sites-all-directory (concat
                                   (projectile-project-root)
                                   "sites/all"))
   ;; if there's a profile dir
-  (if (and cu-drupal-profile-name (file-exists-p (concat
+  (if (and projectile-drupal-profile-name (file-exists-p (concat
                                                   (projectile-project-root)
                                                   "profiles/"
-                                                  cu-drupal-profile-name)))
+                                                  projectile-drupal-profile-name)))
       (progn
         (setq
          cu-drupal-profile-directory (concat
                                       (projectile-project-root)
                                       "profiles/"
-                                      cu-drupal-profile-name)
+                                      projectile-drupal-profile-name)
          cu-drupal-module-directory (concat
                                      cu-drupal-profile-directory
                                      "/modules")
@@ -185,7 +193,7 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
          cu-drupal-profile-theme-directory (concat
                                             cu-drupal-profile-directory
                                             "/themes/"
-                                            cu-drupal-profile-name))
+                                            projectile-drupal-profile-name))
         (setenv "8dt" cu-drupal-profile-theme-directory)
 
 
@@ -231,10 +239,10 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
   (add-to-list 'projectile-globally-ignored-directories
                (concat
                 "profiles/"
-                cu-drupal-profile-name
+                projectile-drupal-profile-name
                 "/modules/contrib"))
 
-  (setenv "8dr" cu-drupal-readme-file-name)
+  (setenv "8dr" projectile-drupal-readme-file-name)
   (setenv "8ds" (projectile-project-root))
   (setenv "DRUPAL_ROOT" (projectile-project-root))
   (setenv "8dT" cu-drupal-theme-directory)
