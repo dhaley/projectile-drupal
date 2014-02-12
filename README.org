@@ -119,7 +119,7 @@ OS X users might want to look at [[https://github.com/purcell/exec-path-from-she
 
 * Contribution
 
-Install [cask](https://github.com/rejeep/cask.el) if you haven't already, then:
+Install [[https://github.com/rejeep/cask][cask]] if you haven't already, then:
 
 #+BEGIN_SRC sh
 $ cd /path/to/projectile-drupal
