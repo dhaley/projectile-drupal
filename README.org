@@ -93,6 +93,27 @@ You might want to create your own keybinding for your favorite commands. For exa
 #+END_SRC
 
 
+* Eshell
+If you use eshell, you can tap into the power of projectile-drupal by putting
+the following aliaes in you *eshell-alias-file*.
+#+BEGIN_SRC emacs-lisp
+alias 8dr vo $projectile-drupal-readme-file-name
+alias 8dt cd $projectile-drupal-theme-directory
+alias 8db cd $projectile-drupal-contrib-directory
+alias 8df cd $projectile-drupal-feature-directory
+alias 8dc cd $projectile-drupal-custom-directory
+alias 8dm cd $projectile-drupal-module-directory
+alias 8dp cd $projectile-drupal-profile-directory
+alias 8ds cd (projectile-project-root)
+alias 8dT cd $projectile-drupal-theme-directory
+alias 8dt cd $projectile-drupal-default-theme-directory
+alias 8dd cd $projectile-drupal-default-directory
+alias 8da cd $projectile-drupal-sites-all-directory
+alias 8dS vo $projectile-drupal-settings-file-name
+alias 8dl vo $projectile-drupal-settings-local-file-name
+alias si drush -y si $(curr-dir-project-string)
+alias dl drush dl $1 --destination=$projectile-drupal-contrib-directory --select
+#+END_SRC
 * Beyond
 
 Consider installing other Emacs packages that can help you working
