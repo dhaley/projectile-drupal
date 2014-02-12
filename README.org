@@ -119,17 +119,5 @@ OS X users might want to look at [[https://github.com/purcell/exec-path-from-she
 
 * Contribution
 
-Install [[https://github.com/rejeep/cask][cask]] if you haven't already, then:
-
-#+BEGIN_SRC sh
-$ cd /path/to/projectile-drupal
-$ cask
-#+END_SRC
-
-Run all tests with:
-
-#+BEGIN_SRC sh
-$ make test
-#+END_SRC
-
-For all of them to pass you will need the `bundle` executable in your path.
+Pull requests and issues are welcome as I would like this project to grow to
+support Drupal 8 with emacs.
