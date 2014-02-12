@@ -1193,36 +1193,50 @@ PWD is not in a project"
 (easy-menu-define projectile-drupal-menu projectile-drupal-mode-map
   "Menu for `projectile-drupal-mode'."
   '("Drupal"
-    ["Find model"                projectile-drupal-find-model]
-    ["Find controller"           projectile-drupal-find-controller]
-    ["Find view"                 projectile-drupal-find-view]
-    ["Find helper"               projectile-drupal-find-helper]
-    ["Find lib"                  projectile-drupal-find-lib]
-    ["Find spec"                 projectile-drupal-find-spec]
-    ["Find log"                  projectile-drupal-find-log]
-    ["Find migration"            projectile-drupal-find-migration]
-    ["Find javascript"           projectile-drupal-find-javascript]
-    ["Find initializer"          projectile-drupal-find-initializer]
-    ["Find environment"          projectile-drupal-find-environment]
-    ["Find locale"               projectile-drupal-find-locale]
-    ["Find mailer"               projectile-drupal-find-mailer]
-    ["Find layout"               projectile-drupal-find-layout]
+    ["Goto readme" projectile-drupal-find-readme]
+    ["Goto Drupal Root" projectile-drupal-find-site-directory]
+    ["Goto themes directory" projectile-drupal-find-theme-directory]
+    ["Goto module directory" projectile-drupal-find-module-directory]
+    ["Goto custom module directory" projectile-drupal-find-custom-directory]
+    ["Goto features module directory" projectile-drupal-find-feature-directory]
+    ["Goto sites/default directory" projectile-drupal-find-default-directory]
+    ["Goto sites/all directory" projectile-drupal-find-sites-all-directory]
+    ["Goto contrib module directory" projectile-drupal-find-contrib-directory]
+    ["Goto default theme directory" projectile-drupal-find-profile-theme-directory]
+    ["Goto profile directory" projectile-drupal-find-profile-directory]
+    ["Goto settings.php" projectile-drupal-find-settings-file-name]
+    ["Goto settings.local.php" projectile-drupal-find-settings-local-file-name]
     "--"
-    ["Go to file at point"       projectile-drupal-goto-file-at-point]
+    ["Clear cache" projectile-drupal-drush-cache-clear-all]
+    ["Run drush --uli" projectile-drupal-drush-uli-to-string]
+    ["Display watchdog messages" projectile-drupal-drush-watchdog-show]
+    ["Run drush pm-update" projectile-drupal-drush-up]
     "--"
-    ["Go to Gemfile"             projectile-drupal-goto-gemfile]
-    ["Go to routes"              projectile-drupal-goto-routes]
-    ["Go to schema"              projectile-drupal-goto-schema]
-    ["Go to spec_helper"         projectile-drupal-goto-spec-helper]
+    ["Display Drupal version" projectile-drupal-projectile-drupal-drush-version]
+    ["Display Drupal status" projectile-drupal-drush-core-status]
+    ["Display status debug" projectile-drupal-drush-core-status-debug]
     "--"
-    ["Go to current model"       projectile-drupal-find-current-spec]
-    ["Go to current controller"  projectile-drupal-find-current-controller]
-    ["Go to current view"        projectile-drupal-find-current-view]
-    ["Go to current spec"        projectile-drupal-find-current-spec]
-    ["Go to current migration"   projectile-drupal-find-current-migration]
+    ["Interactive display variable in status bar" projectile-drupal-drush-get-variable]
+    ["Displays all variables in buffer" projectile-drupal-drush-get-variables]
     "--"
-    ["Run console"               projectile-drupal-console]
-    ["Run drupal generate"       projectile-drupal-generate]))
+    ["Disable cu_cache module" projectile-drupal-drush-disable-cu-cache]
+    "--"
+    ["Display module info" projectile-drupal-drush-pm-info]
+    ["Display enabled features" projectile-drupal-drush-features-enabled]
+    ["Display features" projectile-drupal-drush-features-list]
+    ["Display non-core modules" projectile-drupal-drush-modules-nocore]
+    "--"
+    ["Drush sql-sync from prod to local" projectile-drupal-drush-sql-sync-prod]
+    ["Drush sql-sync from stage to local" projectile-drupal-drush-sql-sync-stage]
+    ["Drush sql-sync from dev to local" projectile-drupal-drush-sql-sync-dev]
+    ["Drush rsync from prod to local" projectile-drupal-drush-rsync-prod]
+    ["Drush rsync from stage to local" projectile-drupal-drush-rsync-stage]
+    ["Drush rsync from dev to local" projectile-drupal-drush-rsync-dev]
+    "--"
+    ["Open prod site in browser" projectile-drupal-choose-cu-site-prod]
+    ["Open stage site in browser" projectile-drupal-choose-cu-site-stage]
+    ["Open dev site in browser" projectile-drupal-choose-cu-site-dev]
+    ["Open test site in browser" projectile-drupal-choose-cu-site-test]))
 
 ;;;###autoload
 (define-minor-mode projectile-drupal-mode
