@@ -124,7 +124,7 @@ files.
 
 | Extension | Alternatives       |
 |-----------+--------------------|
-| erb       | [[https://github.com/fxbois/web-mode][web-mode]], [[https://github.com/purcell/mmm-mode][mmm-mode]] |
+| tpl.php   | [[https://github.com/fxbois/web-mode][web-mode]], [[https://github.com/purcell/mmm-mode][mmm-mode]] |
 | yaml      | [[https://github.com/yoshiki/yaml-mode][yaml-mode]]          |
 
 ** Running drush
