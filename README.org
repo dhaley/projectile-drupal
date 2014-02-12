@@ -1,6 +1,6 @@
 * Synopsis
 
-*Projectile Drupal* is a minor mode for working with the Drupal project in GNU Emacs.
+*Projectile Drupal* is a minor mode for working with the Drupal 7 projects in GNU Emacs.
 Internally it based on [[Projectile][https://github.com/bbatsov/projectile]].
 
 TODO: It means that you can use Projectile's commands for greping (or acking) files, run tests, switch between projects, etc.
@@ -8,15 +8,22 @@ TODO: It means that you can use Projectile's commands for greping (or acking) fi
 With Projectile Drupal you are able to:
 
 ** navigate through drupal resources (modules, themes, profiles and so on)
-** TODO: run `drupal console`
-** TODO: open log files with `auto-revert-mode` on
-** TODO: see drupal keywords highlighted
+** have project environment variables available emacs shells such as eshell
+** run drush --uli
 
 * Setup
 
 ** Installation
 
-*** TODO:
+Eventually this might be a MELPA package.
+
+But for now, you can do this.
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path "~/.emacs.d/site-lisp/projectile-drupal")
+(require 'projectile-drupal)
+#+END_SRC
+
 
 * Usage
 
@@ -33,22 +40,6 @@ That will start it only if the current project is a Drupal project.
 Probably you should read Projectile's [[https://github.com/bbatsov/projectile][README]] on setting up the completion
 system, caching and indexing files. Although the default settings are quite
 sensible and you should be ready to go without much tweaking.
-
-** Customizing
-
-TODO:
-The mode's buffers will have the Drupal keywords higlighted. To turn it off:
-
-#+BEGIN_SRC emacs-lisp
-(setq projectile-drupal-add-keywords nil)
-#+END_SRC
-
-TODO:
-If you are using [[https://github.com/capitaomorte/yasnippet][yasnippet]] and you open a new file it will be filled with a skeleton class. To turn it off:
-
-#+BEGIN_SRC emacs-lisp
-(setq projectile-drupal-expand-snippet nil)
-#+END_SRC
 
 * Interactive commands
 
@@ -87,7 +78,8 @@ You might want to create your own keybinding for your favorite commands. For exa
 
 * Beyond
 
-Consider installing other Emacs packages that can help you working specifically with Drupal projects.
+Consider installing other Emacs packages that can help you working
+specifically with Drupal projects such as [[https://github.com/arnested/drupal-mode][drupal-mode]].
 
 ** Templates
 
