@@ -44,18 +44,6 @@
   :prefix "projectile-drupal-"
   :group 'projectile)
 
-(defcustom projectile-drupal-errors-re
-  "\\([0-9A-Za-z@_./\:-]+\\.rb\\):?\\([0-9]+\\)?"
-  "The regex used to find errors with file paths."
-  :group 'projectile-drupal
-  :type 'string)
-
-(defcustom projectile-drupal-generate-filepath-re
-  "^\\s-+\\(?:create\\|exists\\|conflict\\|skip\\)\\s-+\\(.+\\)$"
-  "The regex used to find file paths in `projectile-drupal-generate-mode'."
-  :group 'projectile-drupal
-  :type 'string)
-
 (defcustom projectile-drupal-site-name-function
   'projectile-drupal-site-name
   "Function to set projectile-drupal-site-name.
@@ -68,9 +56,6 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
 
 (defcustom projectile-drupal-expand-snippet t
   "If not nil newly created buffers will be pre-filled with class skeleton.")
-
-(defcustom projectile-drupal-add-keywords t
-  "If not nil the drupal keywords will be font locked in the mode's bufffers.")
 
 (defcustom projectile-drupal-keymap-prefix (kbd "C-8")
   "`projectile-drupal-mode' keymap prefix."
@@ -116,6 +101,14 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
    "Full path of Drupal's theme_default"))
 
 (make-variable-buffer-local
+ (defvar projectile-drupal-feature-directory
+   "Full path of Drupal's feature module directory."))
+
+(make-variable-buffer-local
+ (defvar projectile-drupal-contrib-directory
+   "Full path of Drupal's contrib module directory."))
+
+(make-variable-buffer-local
  (defvar projectile-drupal-custom-directory
    "Full path of Drupal's custom module directory."))
 
@@ -130,6 +123,26 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
 (make-variable-buffer-local
  (defvar projectile-drupal-settings-local-file-name
    "Full path of Drupal's sites/default/settings.local.php file"))
+
+(make-variable-buffer-local
+ (defvar projectile-drupal-local-alias
+   "Drush local alias."))
+
+(make-variable-buffer-local
+ (defvar projectile-drupal-dev-alias
+   "Drush dev environment alias"))
+
+(make-variable-buffer-local
+ (defvar projectile-drupal-stage-alias
+   "Drush stage environment alias."))
+
+(make-variable-buffer-local
+ (defvar projectile-drupal-test-alias
+   "Drush test environment alias."))
+
+(make-variable-buffer-local
+ (defvar projectile-drupal-prod-alias
+   "Drush projection environment alias."))
 
 (defun projectile-drupal-site-name-default-function ()
   "My Drupal Site"
@@ -860,9 +873,7 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
               "admin/config/media/file-types/manage/%/fields/%/field-settings"
               "admin/config/media/file-types/manage/%/fields/%/widget-type"
               "admin/config/media/file-types/manage/%/groups/%/delete"
-              "admin/config/media/image-styles/edit/%/effects/%/delete"))
-  )
-
+              "admin/config/media/image-styles/edit/%/effects/%/delete")))
 
 (defun projectile-drupal-choose-cu-site (env site)
   "env & URL"
@@ -1121,124 +1132,12 @@ PWD is not in a project"
   (let ((menu (completing-read "Browse: " d7-menus)))
     (browse-url (concat base_url "/" menu))))
 
-
-(defun projectile-drupal-list-entries (fun dir)
-  (--map
-   (substring it (length (concat (projectile-drupal-root) dir)))
-   (funcall fun (projectile-expand-root dir))))
-
-(defun projectile-drupal-find-log ()
-  (interactive)
-  ;;logs tend to not be under scm so do not resort to projectile-dir-files
-  (find-file (projectile-expand-root
-              (concat
-               "log/"
-               (projectile-completing-read
-                "log: "
-                (projectile-drupal-list-entries 'f-files "log/")))))
-  (auto-revert-tail-mode +1)
-  (setq-local auto-revert-verbose nil)
-  (buffer-disable-undo)
-  (projectile-drupal-on))
-
 (defun projectile-drupal-root ()
   "Returns drupal root directory if this file is a part of a Drupal application else nil"
   (and
    (projectile-project-p)
    (file-exists-p (projectile-expand-root "includes/bootstrap.inc"))
 (projectile-project-root)))
-
-
-
-
-;; (defun projectile-drupal-console ()
-;;   (interactive)
-;;   (projectile-drupal-with-root
-;;    (with-current-buffer (run-ruby
-;;                          (projectile-drupal-with-preloader
-;;                           :spring "spring drupal console"
-;;                           :zeus "zeus console"
-;;                           :vanilla "bundle exec drupal console"))
-;;      (projectile-drupal-mode +1))))
-
-(defun projectile-drupal-expand-snippet-maybe ()
-  (when (and (fboundp 'yas-expand-snippet)
-             (and (buffer-file-name) (not (file-exists-p (buffer-file-name))))
-             (s-blank? (buffer-string))
-        (projectile-drupal-expand-corresponding-snippet))))
-
-(defun projectile-drupal-expand-corresponding-snippet ()
-  (let ((name (buffer-file-name)))
-    (yas-expand-snippet
-     (cond ((string-match "app/controllers/\\(.+\\)\\.rb$" name)
-            (format
-             "class %s < ${1:ApplicationController}\n$2\nend"
-             (s-join "::" (projectile-drupal-classify (match-string 1 name)))))
-           ((string-match "spec/[^/]+/\\(.+\\)_spec\\.rb$" name)
-            (format
-             "require \"spec_helper\"\n\ndescribe %s do\n$1\nend"
-             (s-join "::" (projectile-drupal-classify (match-string 1 name)))))
-           ((string-match "app/models/\\(.+\\)\\.rb$" name)
-            (format
-             "class %s < ${1:ActiveRecord::Base}\n$2\nend"
-             (s-join "::" (projectile-drupal-classify (match-string 1 name)))))
-           ((string-match "lib/\\(.+\\)\\.rb$" name)
-            (let ((parts (projectile-drupal-classify (match-string 1 name))))
-              (format
-               (concat
-                (s-join
-                 ""
-                 (--map (s-lex-format "module ${it}\n") (butlast parts)))
-                "${1:module} %s\n$2\nend"
-                (s-join "" (make-list (1- (length parts)) "\nend")))
-               (-last-item parts))))))))
-
-(defun projectile-drupal-template-name (template)
-  (-first-item (s-split "\\." (-last-item (s-split "/" template)))))
-
-(defun projectile-drupal-template-format (template)
-  (let ((at-point-re "\\.\\([^.]+\\)\\.[^.]+$")
-        (at-line-re "formats\\(?:'\"\\|:\\)?\\s-*\\(?:=>\\)?\\s-*\\[[:'\"]\\([a-zA-Z0-9]+\\)['\"]?\\]"))
-    (cond ((string-match at-point-re template)
-           (match-string 1 template))
-          ((string-match at-line-re (projectile-drupal-current-line))
-           (match-string 1 (projectile-drupal-current-line)))
-          (t
-           (when (string-match at-point-re (buffer-file-name))
-             (match-string 1 (buffer-file-name)))))))
-
-(defun projectile-drupal-template-dir (template)
-  (projectile-drupal-sanitize-dir-name
-   (cond ((string-match "\\(.+\\)/[^/]+$" template)
-          (projectile-expand-root
-           (concat "app/views/" (match-string 1 template))))
-         ((string-match "app/controllers/\\(.+\\)_controller\\.rb$" (buffer-file-name))
-          (projectile-expand-root
-           (concat "app/views/" (match-string 1 (buffer-file-name)))))
-         (t
-          default-directory))))
-
-(defun projectile-drupal-goto-template-at-point ()
-  (interactive)
-  (let* ((template (projectile-drupal-filename-at-point))
-         (dir (projectile-drupal-template-dir template))
-         (name (projectile-drupal-template-name template))
-         (format (projectile-drupal-template-format template)))
-    (if format
-        (loop for processor in '("erb" "haml" "slim")
-              for template = (s-lex-format "${dir}${name}.${format}.${processor}")
-              for partial = (s-lex-format "${dir}_${name}.${format}.${processor}")
-              until (or
-                     (projectile-drupal-ff template)
-                     (projectile-drupal-ff partial)))
-      (message "Could not recognize the template's format")
-      (dired dir))))
-
-(defun projectile-drupal-name-at-point ()
-  (projectile-drupal-sanitize-name (symbol-name (symbol-at-point))))
-
-(defun projectile-drupal-filename-at-point ()
-  (projectile-drupal-sanitize-name (thing-at-point 'filename)))
 
 (defvar projectile-drupal-mode-goto-map
   (let ((map (make-sparse-keymap)))
@@ -1332,7 +1231,7 @@ PWD is not in a project"
   :init-value nil
   :lighter " Drupal"
   (when projectile-drupal-mode
-    (and projectile-drupal-expand-snippet (projectile-drupal-expand-snippet-maybe))
+    ;; (and projectile-drupal-expand-snippet (projectile-drupal-expand-snippet-maybe))
     ;; specify buffer-local-variables
     (projectile-drupal-setup)
 ))
