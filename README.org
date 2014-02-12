@@ -114,8 +114,8 @@ OS X users might want to look at [[https://github.com/purcell/exec-path-from-she
 
 * Miscellaneous
 
-** [[https://github.com/eethann/emacs-behat-mink][Emacs Behat Mink Tools]]
-** [[https://github.com/magit/magit][magit]] to interact with git.
+- [[https://github.com/eethann/emacs-behat-mink][Emacs Behat Mink Tools]]
+- [[https://github.com/magit/magit][magit]] to interact with git.
 
 * Contribution
 
