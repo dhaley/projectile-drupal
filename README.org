@@ -5,7 +5,7 @@ Internally it based on [[https://github.com/bbatsov/projectile][Projectile]].
 
 It means that you can use Projectile's commands for greping (or acking) files,
 run tests, switch between projects, etc.  It's a great way to navigate a
-Drupal multi-site or [[https://drupal.org/project/dslm‎][dslm]] bases site file structure.
+Drupal multi-site or [[https://drupal.org/project/dslm‎][dslm]] based site file structure.
 
 With Projectile Drupal you are able to:
 
