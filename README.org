@@ -5,12 +5,12 @@ Internally it based on [[Projectile][https://github.com/bbatsov/projectile]].
 
 It means that you can use Projectile's commands for greping (or acking) files,
 run tests, switch between projects, etc.  It's a great way to navigate a
-Drupal multi-site or dslm bases site file structure.
+Drupal multi-site or [[https://drupal.org/project/dslm‎][dslm]] bases site file structure.
 
 With Projectile Drupal you are able to:
 
 - navigate through drupal resources (modules, themes, profiles and so on)
-- have project environment variables available emacs shells such as eshell
+- have project environment variables available in emacs shells such as *eshell*
 - run drush --uli
 
 * Setup
