@@ -7,9 +7,9 @@ It means that you can use Projectile's commands for greping (or acking) files, r
 
 With Projectile Drupal you are able to:
 
-- Navigate through drupal resources (modules, themes, profiles and so on)
-- Have project environment variables available emacs shells such as eshell
-- Run drush --uli
+- navigate through drupal resources (modules, themes, profiles and so on)
+- have project environment variables available emacs shells such as eshell
+- run drush --uli
 
 * Setup
 
@@ -44,44 +44,44 @@ sensible and you should be ready to go without much tweaking.
 * Interactive commands
 
 
-| Command                                         | Keybinding         | Description                                             |
-|-------------------------------------------------+--------------------+---------------------------------------------------------|
-| projectile-drupal-find-site-directory           | <kbd>C-8 d s</kbd> | Go to Drupal Root                                       |
-| projectile-drupal-find-theme-directory          | <kbd>C-8 d T</kbd> | Go to base theme directory                              |
-| projectile-drupal-find-module-directory         | <kbd>C-8 d m</kbd> | Go to base module directory                             |
-| projectile-drupal-find-custom-directory         | <kbd>C-8 d c</kbd> | Go to custom module directory                           |
-| projectile-drupal-find-feature-directory        | <kbd>C-8 d f</kbd> | Go to feature module directory                          |
-| projectile-drupal-find-contrib-directory        | <kbd>C-8 d b</kbd> | Go to contrib mdoule directory                          |
-| projectile-drupal-find-profile-theme-directory  | <kbd>C-8 d t</kbd> | Go to 'default_theme' directory                         |
-| projectile-drupal-find-default-directory        | <kbd>C-8 d d</kbd> | Go to sites/default directory                           |
-| projectile-drupal-find-sites-all-directory      | <kbd>C-8 d a</kbd> | Go to sites/all directory                               |
-| projectile-drupal-find-settings-file-name       | <kbd>C-8 d S</kbd> | Go to settings.php file                                 |
-| projectile-drupal-find-readme                   | <kbd>C-8 d r</kbd> | Go to Readme file in Drupal ROOT                        |
-| projectile-drupal-find-settings-local-file-name | <kbd>C-8 d l</kbd> | Go to local.settings.php file                           |
-| projectile-drupal-find-profile-directory        | <kbd>C-8 d p</kbd> | Go to 'profile' directory                               |
-| projectile-drupal-drush-cache-clear-all         | <kbd>C-8 c c</kbd> | Clear cache                                             |
-| projectile-drupal-drush-uli-to-string           | <kbd>C-8 d e</kbd> | Run drush --uli                                         |
-| projectile-drupal-drush-version                 | <kbd>C-8 d v</kbd> | Display drupal version                                  |
-| projectile-drupal-drush-watchdog-show           | <kbd>C-8 w s</kbd> | *drush watchdog-show*                                   |
-| projectile-drupal-drush-core-status             | <kbd>C-8 c s</kbd> | *drush core-status*                                     |
-| projectile-drupal-drush-core-status-debug       | <kbd>C-8 c d</kbd> | *drush core-status --debug*                             |
-| projectile-drupal-drush-pm-info                 | <kbd>C-8 p i</kbd> | *drush pm-info*                                         |
-| projectile-drupal-drush-modules-nocore          | <kbd>C-8 m n</kbd> | *drush pm-list --status=enabled --no-core --type=module |
-| projectile-drupal-drush-features-list           | <kbd>C-8 f l</kbd> | *drush features-list                                    |
-| projectile-drupal-drush-features-enabled        | <kbd>C-8 f e</kbd> | *drush features-list --status=enabled                   |
-| projectile-drupal-drush-up                      | <kbd>C-8 u p</kbd> | *drush up -n --pipe*                                    |
-| projectile-drupal-drush-get-variable            | <kbd>C-8 g v</kbd> | Interactive display variable in status bar              |
-| projectile-drupal-drush-get-variables           | <kbd>C-8 g V</kbd> | Displays all system table variables in buffer           |
-| projectile-drupal-drush-sql-sync-prod           | <kbd>C-8 s p</kbd> | Drush sql-sync from prod to local                       |
-| projectile-drupal-drush-sql-sync-stage          | <kbd>C-8 s s</kbd> | Drush sql-sync from stage to local                      |
-| projectile-drupal-drush-sql-sync-dev            | <kbd>C-8 s d</kbd> | Drush sql-sync from dev to local                        |
-| projectile-drupal-drush-rsync-prod              | <kbd>C-8 r p</kbd> | Drush rsync from prod to local                          |
-| projectile-drupal-drush-rsync-stage             | <kbd>C-8 r s</kbd> | Drush rsync from stage to local                         |
-| projectile-drupal-drush-rsync-dev               | <kbd>C-8 r d</kbd> | Drush rsync from dev to local                           |
-| projectile-drupal-choose-cu-site-prod           | <kbd>C-8 b p</kbd> | Open prod site in browser                               |
-| projectile-drupal-choose-cu-site-stage          | <kbd>C-8 b s</kbd> | Open stage site in browser                              |
-| projectile-drupal-choose-cu-site-dev            | <kbd>C-8 b d</kbd> | Open dev site in browser                                |
-| projectile-drupal-choose-cu-site-test           | <kbd>C-8 b t</kbd> | Open test site in browser                               |
+| Command                                         | Keybinding         | Description                                            |
+|-------------------------------------------------+--------------------+--------------------------------------------------------|
+| projectile-drupal-find-site-directory           | <kbd>C-8 d s</kbd> | Go to Drupal Root                                      |
+| projectile-drupal-find-theme-directory          | <kbd>C-8 d T</kbd> | Go to base theme directory                             |
+| projectile-drupal-find-module-directory         | <kbd>C-8 d m</kbd> | Go to base module directory                            |
+| projectile-drupal-find-custom-directory         | <kbd>C-8 d c</kbd> | Go to custom module directory                          |
+| projectile-drupal-find-feature-directory        | <kbd>C-8 d f</kbd> | Go to feature module directory                         |
+| projectile-drupal-find-contrib-directory        | <kbd>C-8 d b</kbd> | Go to contrib mdoule directory                         |
+| projectile-drupal-find-profile-theme-directory  | <kbd>C-8 d t</kbd> | Go to 'default_theme' directory                        |
+| projectile-drupal-find-default-directory        | <kbd>C-8 d d</kbd> | Go to sites/default directory                          |
+| projectile-drupal-find-sites-all-directory      | <kbd>C-8 d a</kbd> | Go to sites/all directory                              |
+| projectile-drupal-find-settings-file-name       | <kbd>C-8 d S</kbd> | Go to settings.php file                                |
+| projectile-drupal-find-readme                   | <kbd>C-8 d r</kbd> | Go to Readme file in Drupal ROOT                       |
+| projectile-drupal-find-settings-local-file-name | <kbd>C-8 d l</kbd> | Go to local.settings.php file                          |
+| projectile-drupal-find-profile-directory        | <kbd>C-8 d p</kbd> | Go to 'profile' directory                              |
+| projectile-drupal-drush-cache-clear-all         | <kbd>C-8 c c</kbd> | Clear cache                                            |
+| projectile-drupal-drush-uli-to-string           | <kbd>C-8 d e</kbd> | Run drush --uli                                        |
+| projectile-drupal-drush-version                 | <kbd>C-8 d v</kbd> | Display drupal version                                 |
+| projectile-drupal-drush-watchdog-show           | <kbd>C-8 w s</kbd> | drush watchdog-show*                                   |
+| projectile-drupal-drush-core-status             | <kbd>C-8 c s</kbd> | drush core-status*                                     |
+| projectile-drupal-drush-core-status-debug       | <kbd>C-8 c d</kbd> | drush core-status --debug*                             |
+| projectile-drupal-drush-pm-info                 | <kbd>C-8 p i</kbd> | drush pm-info*                                         |
+| projectile-drupal-drush-modules-nocore          | <kbd>C-8 m n</kbd> | drush pm-list --status=enabled --no-core --type=module |
+| projectile-drupal-drush-features-list           | <kbd>C-8 f l</kbd> | drush features-list                                    |
+| projectile-drupal-drush-features-enabled        | <kbd>C-8 f e</kbd> | drush features-list --status=enabled                   |
+| projectile-drupal-drush-up                      | <kbd>C-8 u p</kbd> | drush up -n --pipe                                     |
+| projectile-drupal-drush-get-variable            | <kbd>C-8 g v</kbd> | Interactive display variable in status bar             |
+| projectile-drupal-drush-get-variables           | <kbd>C-8 g V</kbd> | Displays all system table variables in buffer          |
+| projectile-drupal-drush-sql-sync-prod           | <kbd>C-8 s p</kbd> | Drush sql-sync from prod to local                      |
+| projectile-drupal-drush-sql-sync-stage          | <kbd>C-8 s s</kbd> | Drush sql-sync from stage to local                     |
+| projectile-drupal-drush-sql-sync-dev            | <kbd>C-8 s d</kbd> | Drush sql-sync from dev to local                       |
+| projectile-drupal-drush-rsync-prod              | <kbd>C-8 r p</kbd> | Drush rsync from prod to local                         |
+| projectile-drupal-drush-rsync-stage             | <kbd>C-8 r s</kbd> | Drush rsync from stage to local                        |
+| projectile-drupal-drush-rsync-dev               | <kbd>C-8 r d</kbd> | Drush rsync from dev to local                          |
+| projectile-drupal-choose-cu-site-prod           | <kbd>C-8 b p</kbd> | Open prod site in browser                              |
+| projectile-drupal-choose-cu-site-stage          | <kbd>C-8 b s</kbd> | Open stage site in browser                             |
+| projectile-drupal-choose-cu-site-dev            | <kbd>C-8 b d</kbd> | Open dev site in browser                               |
+| projectile-drupal-choose-cu-site-test           | <kbd>C-8 b t</kbd> | Open test site in browser                              |
 
 You might want to create your own keybinding for your favorite commands. For example:
 
