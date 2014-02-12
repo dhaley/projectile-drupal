@@ -3,13 +3,13 @@
 *Projectile Drupal* is a minor mode for working with the Drupal 7 projects in GNU Emacs.
 Internally it based on [[Projectile][https://github.com/bbatsov/projectile]].
 
-TODO: It means that you can use Projectile's commands for greping (or acking) files, run tests, switch between projects, etc.
+It means that you can use Projectile's commands for greping (or acking) files, run tests, switch between projects, etc.
 
 With Projectile Drupal you are able to:
 
-** navigate through drupal resources (modules, themes, profiles and so on)
-** have project environment variables available emacs shells such as eshell
-** run drush --uli
+- Navigate through drupal resources (modules, themes, profiles and so on)
+- Have project environment variables available emacs shells such as eshell
+- Run drush --uli
 
 * Setup
 
