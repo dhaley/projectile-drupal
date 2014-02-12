@@ -37,7 +37,6 @@
 
 (require 'projectile)
 (require 'f)
-(require 'drupal-mode)
 
 (defgroup projectile-drupal nil
   "Drupal mode based on projectile"
