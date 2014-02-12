@@ -1149,7 +1149,7 @@ PWD is not in a project"
       (define-key map (kbd "t") 'projectile-drupal-find-profile-theme-directory)
       (define-key map (kbd "p") 'projectile-drupal-find-profile-directory)
       (define-key map (kbd "e") 'projectile-drupal-drush-uli-to-string)
-      (define-key map (kbd "v") 'projectile-drupal-projectile-drupal-drush-version)
+      (define-key map (kbd "v") 'projectile-drupal-drush-version)
 
     map)
   "A goto map for `projectile-drupal-mode'."
@@ -1175,10 +1175,10 @@ PWD is not in a project"
       (define-key prefix-map (kbd "rp") 'projectile-drupal-drush-rsync-prod)
       (define-key prefix-map (kbd "rs") 'projectile-drupal-drush-rsync-stage)
       (define-key prefix-map (kbd "rd") 'projectile-drupal-drush-rsync-dev)
-      (define-key prefix-map (kbd "cp") 'projectile-drupal-choose-cu-site-prod)
-      (define-key prefix-map (kbd "cs") 'projectile-drupal-choose-cu-site-stage)
-      (define-key prefix-map (kbd "cd") 'projectile-drupal-choose-cu-site-dev)
-      (define-key prefix-map (kbd "ct") 'projectile-drupal-choose-cu-site-test)
+      (define-key prefix-map (kbd "bp") 'projectile-drupal-choose-cu-site-prod)
+      (define-key prefix-map (kbd "bs") 'projectile-drupal-choose-cu-site-stage)
+      (define-key prefix-map (kbd "bd") 'projectile-drupal-choose-cu-site-dev)
+      (define-key prefix-map (kbd "bt") 'projectile-drupal-choose-cu-site-test)
       (define-key prefix-map (kbd "d") projectile-drupal-mode-goto-map)
       (define-key map projectile-drupal-keymap-prefix prefix-map))
     map)
@@ -1203,20 +1203,19 @@ PWD is not in a project"
     "--"
     ["Clear cache" projectile-drupal-drush-cache-clear-all]
     ["Run drush --uli" projectile-drupal-drush-uli-to-string]
-    ["Display watchdog messages" projectile-drupal-drush-watchdog-show]
-    ["Run drush pm-update" projectile-drupal-drush-up]
+    ["Display drupal version" projectile-drupal-drush-version]
     "--"
-    ["Display Drupal version" projectile-drupal-projectile-drupal-drush-version]
-    ["Display Drupal status" projectile-drupal-drush-core-status]
-    ["Display status debug" projectile-drupal-drush-core-status-debug]
+    ["*drush watchdog-show*" projectile-drupal-drush-watchdog-show]
+    ["*drush core-status*" projectile-drupal-drush-core-status]
+    ["*drush core-status --debug*" projectile-drupal-drush-core-status-debug]
+    ["*drush pm-info*" projectile-drupal-drush-pm-info]
+    ["*drush pm-list --status=enabled --no-core --type=module" projectile-drupal-drush-modules-nocore]
+    ["*drush features-list" projectile-drupal-drush-features-list]
+    ["*drush features-list --status=enabled" projectile-drupal-drush-features-enabled]
+    ["*drush up -n --pipe*" projectile-drupal-drush-up]
     "--"
     ["Interactive display variable in status bar" projectile-drupal-drush-get-variable]
-    ["Displays all variables in buffer" projectile-drupal-drush-get-variables]
-    "--"
-    ["Display module info" projectile-drupal-drush-pm-info]
-    ["Display enabled features" projectile-drupal-drush-features-enabled]
-    ["Display features" projectile-drupal-drush-features-list]
-    ["Display non-core modules" projectile-drupal-drush-modules-nocore]
+    ["Displays all system table variables in buffer" projectile-drupal-drush-get-variables]
     "--"
     ["Drush sql-sync from prod to local" projectile-drupal-drush-sql-sync-prod]
     ["Drush sql-sync from stage to local" projectile-drupal-drush-sql-sync-stage]
