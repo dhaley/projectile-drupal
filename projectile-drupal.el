@@ -961,8 +961,7 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
     (end-of-buffer)
     (if (equal (substring (prin1-to-string d-buffer) 16 24) "sql-sync")
         (progn
-          ;; (projectile-drupal-drush-disable-cu-cache)
-          (osx-say "Drush sql-sync complete. You might need to disable CU Cache"))
+          (osx-say "Drush sql-sync complete."))
       (osx-say "Drush complete"))))
 
 (defun* curr-dir-project-string (site-directory profile-dir-path)
@@ -1022,10 +1021,6 @@ PWD is not in a project"
 (defun projectile-drupal-drush-cache-clear-all ()
   (interactive)
   (run-drush-command "cache-clear" "all"))
-
-(defun projectile-drupal-drush-disable-cu-cache ()
-  (interactive)
-  (run-drush-command "dis" "-y" "cu_cache"))
 
 (defun projectile-drupal-drush-watchdog-show ()
   (interactive)
@@ -1168,7 +1163,6 @@ PWD is not in a project"
       (define-key prefix-map (kbd "gv") 'projectile-drupal-drush-get-variable)
       (define-key prefix-map (kbd "pi") 'projectile-drupal-drush-pm-info)
       (define-key prefix-map (kbd "cc") 'projectile-drupal-drush-cache-clear-all)
-      (define-key prefix-map (kbd "dc") 'projectile-drupal-drush-disable-cu-cache)
       (define-key prefix-map (kbd "ws") 'projectile-drupal-drush-watchdog-show)
       (define-key prefix-map (kbd "fe") 'projectile-drupal-drush-features-enabled)
       (define-key prefix-map (kbd "fl") 'projectile-drupal-drush-features-list)
@@ -1218,8 +1212,6 @@ PWD is not in a project"
     "--"
     ["Interactive display variable in status bar" projectile-drupal-drush-get-variable]
     ["Displays all variables in buffer" projectile-drupal-drush-get-variables]
-    "--"
-    ["Disable cu_cache module" projectile-drupal-drush-disable-cu-cache]
     "--"
     ["Display module info" projectile-drupal-drush-pm-info]
     ["Display enabled features" projectile-drupal-drush-features-enabled]
