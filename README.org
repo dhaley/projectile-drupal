@@ -44,35 +44,50 @@ sensible and you should be ready to go without much tweaking.
 * Interactive commands
 
 
-| Command                                          | Keybinding                                 | Description                                                                                              |
-|--------------------------------------------------+--------------------------------------------+----------------------------------------------------------------------------------------------------------|
-| projectile-drupal-find-readme                    | <kbd>C-c d r</kbd>                         | Go to Readme file in Drupal ROOT                                                                         |
-| projectile-drupal-find-site-directory            | <kbd>C-c d s</kbd>                         | Go to Drupal Root                                                                                        |
-| projectile-drupal-find-theme-directory           | <kbd>C-c d T</kbd>                         | Go to base theme directory                                                                               |
-| projectile-drupal-find-module-directory          | <kbd>C-c d m</kbd>                         | Go to base module directory                                                                              |
-| projectile-drupal-find-custom-directory          | <kbd>C-c d c</kbd>                         | Go to custom module directory                                                                            |
-| projectile-drupal-find-feature-directory         | <kbd>C-c d f</kbd>                         | Go to feature module directory                                                                           |
-| projectile-drupal-find-default-directory         | <kbd>C-c d d</kbd>                         | Go to default site directory                                                                             |
-| projectile-drupal-find-sites-all-directory       | <kbd>C-c d a</kbd>                         | Go to site all directory                                                                                 |
-| projectile-drupal-find-settings-file-name        | <kbd>C-c d S</kbd>                         | Go to settings.php file                                                                                  |
-| projectile-drupal-find-settings-local-file-name  | <kbd>C-c d l</kbd>                         | Go to local.settings.php file                                                                            |
-| projectile-drupal-find-contrib-directory         | <kbd>C-c d b</kbd>                         | Go to contrib mdoule directory                                                                           |
-| projectile-drupal-find-profile-theme-directory   | <kbd>C-c d t</kbd>                         | Go to profile theme directory                                                                            |
-| projectile-drupal-find-profile-directory         | <kbd>C-c d p</kbd>                         | Go to profile directory                                                                                  |
-| projectile-drupal-find-log                       | <kbd>C-c d o</kbd>                         | Find a log file and enable `auto-revert-tail-mode` in its buffer.                                        |
-| projectile-drupal-console                        | <kbd>C-c d r</kbd>                         | Run `drupal console` command in `inf-ruby` buffer.                                                       |
-| projectile-drupal-rake                           | <kbd>C-c d k</kbd>                         | Select a rake task to run using `projectile-completion-system`.                                          |
-| projectile-drupal-generate                       | <kbd>C-c d t</kbd>                         | Run `drupal generate` command.                                                                           |
-| projectile-drupal-goto-file-at-point             | <kbd>C-c d RET</kbd>, <kbd>C-c d g f</kbd> | Go to a file at point. Depending on the context that might be a constant, template or partial, or a gem. |
+| Command                                         | Keybinding         | Description                                             |
+|-------------------------------------------------+--------------------+---------------------------------------------------------|
+| projectile-drupal-find-readme                   | <kbd>C-8 d r</kbd> | Go to Readme file in Drupal ROOT                        |
+| projectile-drupal-find-site-directory           | <kbd>C-8 d s</kbd> | Go to Drupal Root                                       |
+| projectile-drupal-find-theme-directory          | <kbd>C-8 d T</kbd> | Go to base theme directory                              |
+| projectile-drupal-find-module-directory         | <kbd>C-8 d m</kbd> | Go to base module directory                             |
+| projectile-drupal-find-custom-directory         | <kbd>C-8 d c</kbd> | Go to custom module directory                           |
+| projectile-drupal-find-feature-directory        | <kbd>C-8 d f</kbd> | Go to feature module directory                          |
+| projectile-drupal-find-contrib-directory        | <kbd>C-8 d b</kbd> | Go to contrib mdoule directory                          |
+| projectile-drupal-find-default-directory        | <kbd>C-8 d d</kbd> | Go to sites/default directory                           |
+| projectile-drupal-find-sites-all-directory      | <kbd>C-8 d a</kbd> | Go to sites/all directory                               |
+| projectile-drupal-find-settings-file-name       | <kbd>C-8 d S</kbd> | Go to settings.php file                                 |
+| projectile-drupal-find-settings-local-file-name | <kbd>C-8 d l</kbd> | Go to local.settings.php file                           |
+| projectile-drupal-find-profile-theme-directory  | <kbd>C-8 d t</kbd> | Go to 'default_theme' directory                         |
+| projectile-drupal-find-profile-directory        | <kbd>C-8 d p</kbd> | Go to 'profile' directory                               |
+| projectile-drupal-drush-cache-clear-all         | <kbd>C-8 d p</kbd> | Clear cache                                             |
+| projectile-drupal-drush-uli-to-string           | <kbd>C-8 d p</kbd> | Run drush --uli                                         |
+| projectile-drupal-drush-version                 | <kbd>C-8 d p</kbd> | Display drupal version                                  |
+| projectile-drupal-drush-watchdog-show           | <kbd>C-8 d p</kbd> | *drush watchdog-show*                                   |
+| projectile-drupal-drush-core-status             | <kbd>C-8 d p</kbd> | *drush core-status*                                     |
+| projectile-drupal-drush-core-status-debug       | <kbd>C-8 d p</kbd> | *drush core-status --debug*                             |
+| projectile-drupal-drush-pm-info                 | <kbd>C-8 d p</kbd> | *drush pm-info*                                         |
+| projectile-drupal-drush-modules-nocore          | <kbd>C-8 d p</kbd> | *drush pm-list --status=enabled --no-core --type=module |
+| projectile-drupal-drush-features-list           | <kbd>C-8 d p</kbd> | *drush features-list                                    |
+| projectile-drupal-drush-features-enabled        | <kbd>C-8 d p</kbd> | *drush features-list --status=enabled                   |
+| projectile-drupal-drush-up                      | <kbd>C-8 d p</kbd> | *drush up -n --pipe*                                    |
+| projectile-drupal-drush-get-variable            | <kbd>C-8 d p</kbd> | Interactive display variable in status bar              |
+| projectile-drupal-drush-get-variables           | <kbd>C-8 d p</kbd> | Displays all system table variables in buffer           |
+| projectile-drupal-drush-sql-sync-prod           | <kbd>C-8 d p</kbd> | Drush sql-sync from prod to local                       |
+| projectile-drupal-drush-sql-sync-stage          | <kbd>C-8 d p</kbd> | Drush sql-sync from stage to local                      |
+| projectile-drupal-drush-sql-sync-dev            | <kbd>C-8 d p</kbd> | Drush sql-sync from dev to local                        |
+| projectile-drupal-drush-rsync-prod              | <kbd>C-8 d p</kbd> | Drush rsync from prod to local                          |
+| projectile-drupal-drush-rsync-stage             | <kbd>C-8 d p</kbd> | Drush rsync from stage to local                         |
+| projectile-drupal-drush-rsync-dev               | <kbd>C-8 d p</kbd> | Drush rsync from dev to local                           |
+| projectile-drupal-choose-cu-site-prod           | <kbd>C-8 d p</kbd> | Open prod site in browser                               |
+| projectile-drupal-choose-cu-site-stage          | <kbd>C-8 d p</kbd> | Open stage site in browser                              |
+| projectile-drupal-choose-cu-site-dev            | <kbd>C-8 d p</kbd> | Open dev site in browser                                |
+| projectile-drupal-choose-cu-site-test           | <kbd>C-8 d p</kbd> | Open test site in browser                               |
 
 You might want to create your own keybinding for your favorite commands. For example:
 
 #+BEGIN_SRC emacs-lisp
-(define-key projectile-drupal-mode-map (kbd "s-m")   'projectile-drupal-find-model)
-(define-key projectile-drupal-mode-map (kbd "s-c")   'projectile-drupal-find-controller)
-(define-key projectile-drupal-mode-map (kbd "s-v")   'projectile-drupal-find-view)
-(define-key projectile-drupal-mode-map (kbd "s-RET") 'projectile-drupal-goto-file-at-point)
-(define-key projectile-drupal-mode-map (kbd "C-c g")  projectile-drupal-mode-goto-map)
+(define-key projectile-drupal-mode-map (kbd "s-c")   'projectile-drupal-find-custom-directory)
+(define-key projectile-drupal-mode-map (kbd "s-S")   'projectile-drupal-find-settings-file-name)
 #+END_SRC
 
 

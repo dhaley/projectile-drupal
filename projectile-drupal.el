@@ -1187,15 +1187,15 @@ PWD is not in a project"
 (easy-menu-define projectile-drupal-menu projectile-drupal-mode-map
   "Menu for `projectile-drupal-mode'."
   '("Drupal"
-    ["Goto readme" projectile-drupal-find-readme]
+    ["Goto readme in Drupal Root" projectile-drupal-find-readme]
     ["Goto Drupal Root" projectile-drupal-find-site-directory]
-    ["Goto themes directory" projectile-drupal-find-theme-directory]
-    ["Goto module directory" projectile-drupal-find-module-directory]
+    ["Goto base themes directory" projectile-drupal-find-theme-directory]
+    ["Goto base module directory" projectile-drupal-find-module-directory]
     ["Goto custom module directory" projectile-drupal-find-custom-directory]
     ["Goto features module directory" projectile-drupal-find-feature-directory]
+    ["Goto contrib module directory" projectile-drupal-find-contrib-directory]
     ["Goto sites/default directory" projectile-drupal-find-default-directory]
     ["Goto sites/all directory" projectile-drupal-find-sites-all-directory]
-    ["Goto contrib module directory" projectile-drupal-find-contrib-directory]
     ["Goto default theme directory" projectile-drupal-find-profile-theme-directory]
     ["Goto profile directory" projectile-drupal-find-profile-directory]
     ["Goto settings.php" projectile-drupal-find-settings-file-name]
