@@ -3,7 +3,9 @@
 *Projectile Drupal* is a minor mode for working with the Drupal 7 projects in GNU Emacs.
 Internally it based on [[Projectile][https://github.com/bbatsov/projectile]].
 
-It means that you can use Projectile's commands for greping (or acking) files, run tests, switch between projects, etc.
+It means that you can use Projectile's commands for greping (or acking) files,
+run tests, switch between projects, etc.  It's a great way to navigate a
+Drupal multi-site or dslm bases site file structure.
 
 With Projectile Drupal you are able to:
 
@@ -94,7 +96,8 @@ You might want to create your own keybinding for your favorite commands. For exa
 * Beyond
 
 Consider installing other Emacs packages that can help you working
-specifically with Drupal projects such as [[https://github.com/arnested/drupal-mode][drupal-mode]].
+specifically with Drupal projects such as [[https://github.com/arnested/drupal-mode][drupal-mode]] for editing drupal
+files.
 
 ** Templates
 
