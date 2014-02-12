@@ -1,7 +1,7 @@
 * Synopsis
 
 *Projectile Drupal* is a minor mode for working with the Drupal 7 projects in GNU Emacs.
-Internally it based on [[Projectile][https://github.com/bbatsov/projectile]].
+Internally it based on [[https://github.com/bbatsov/projectile][Projectile]].
 
 It means that you can use Projectile's commands for greping (or acking) files,
 run tests, switch between projects, etc.  It's a great way to navigate a
