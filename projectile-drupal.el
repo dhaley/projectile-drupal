@@ -64,6 +64,13 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
 (defmacro projectile-drupal-with-root (body-form)
   `(let ((default-directory (projectile-drupal-root)))
      ,body-form))
+(defcustom drupal-drush-program (executable-find "drush")
+  "Name of the Drush executable.
+Include path to the executable if it is not in your $PATH."
+  :type 'file
+  :link '(url-link :tag "Drush" "https://github.com/drush-ops/drush")
+  :group 'drupal-drush)
+
 
 (make-variable-buffer-local
  (defvar projectile-drupal-site-name "My Drupal Site"
