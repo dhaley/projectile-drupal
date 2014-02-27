@@ -1130,7 +1130,9 @@ PWD is not in a project"
   "Returns drupal root directory if this file is a part of a Drupal application else nil"
   (and
    (projectile-project-p)
-   (file-exists-p (projectile-expand-root "includes/bootstrap.inc"))
+   (and
+    (file-exists-p (projectile-expand-root "includes/common.inc"))
+    (file-exists-p (projectile-expand-root "includes/bootstrap.inc")))
 (projectile-project-root)))
 
 (defvar projectile-drupal-mode-goto-map
