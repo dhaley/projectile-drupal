@@ -942,24 +942,23 @@ Include path to the executable if it is not in your $PATH."
 
 (defun create-drush-buffer (command &rest a)
   "drush scratchpad buffer(s)"
-  (if (locate-dominating-file default-directory "includes/bootstrap.inc")
-      (progn
-        (let*
-            ((allopt (mapconcat 'identity a " "))
-             (b-name (concat "*drush " command " " allopt "*")))
-          (setq d-buffer (get-buffer-create b-name))
-          (with-current-buffer d-buffer
-            (end-of-buffer)
-            (view-mode 1)
-            (hl-line-mode 1)
-            (let ((coding-system-for-read 'raw-text))
-              (let ((proc (apply 'start-process "drush" (current-buffer)
-                                 drupal-drush-program
-                                 command
-                                 a)))
-                (set-process-sentinel proc 'drush-msg-me))))
-          (message (concat "Starting: drush " command))))
-    (message (concat default-directory " is not a drupal project"))))
+  (progn
+    (let*
+        ((allopt (mapconcat 'identity a " "))
+         (b-name (concat "*drush " command " " allopt "*")))
+      (setq d-buffer (get-buffer-create b-name))
+      (with-current-buffer d-buffer
+        (end-of-buffer)
+        (view-mode 1)
+        (hl-line-mode 1)
+        (projectile-drupal-mode +1)
+        (let ((coding-system-for-read 'raw-text))
+          (let ((proc (apply 'start-process "drush" (current-buffer)
+                             drupal-drush-program
+                             command
+                             a)))
+            (set-process-sentinel proc 'drush-msg-me))))
+      (message (concat "Starting: drush " command)))))
 
 (defun drush-msg-me (process event)
   "Tell me it worked"
@@ -997,23 +996,19 @@ PWD is not in a project"
             (throw 'error "no profile")))))))
 
 (defun run-drush-command (command &rest a)
-  (if (or (locate-dominating-file default-directory
-                                  "includes/bootstrap.inc")
-          (equal command "--version"))
-      (progn
-        (let*
-            ((allopt (mapconcat 'identity a " "))
-             (output (shell-command-to-string
-                      (concat
-                       "drush "
-                       command
-                       " "
-                       allopt))))
-          (message "%s" (propertize output 'face '(:foreground
-                                                   "#dc322f")))
-          ;; (osx-say output)
-          ))
-    (message (concat default-directory " is not a drupal project"))))
+  (progn
+    (let*
+        ((allopt (mapconcat 'identity a " "))
+         (output (shell-command-to-string
+                  (concat
+                   "drush "
+                   command
+                   " "
+                   allopt))))
+      (message "%s" (propertize output 'face '(:foreground
+                                               "#dc322f")))
+      ;; (osx-say output)
+      )))
 
 (defun projectile-drupal-drush-get-variable (v)
   "prompt for variable and get its value"
@@ -1112,8 +1107,7 @@ PWD is not in a project"
      "-v"
      "rsync"
      (concat projectile-drupal-dev-alias ":%files/")
-     (concat projectile-drupal-local-alias ":%files/")))
-   ))
+     (concat projectile-drupal-local-alias ":%files/")))))
 
 (defun projectile-drupal-drush-rsync-prod ()
   (interactive)
