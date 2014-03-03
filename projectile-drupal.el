@@ -958,6 +958,7 @@ Include path to the executable if it is not in your $PATH."
                              command
                              a)))
             (set-process-sentinel proc 'drush-msg-me))))
+      (switch-to-buffer d-buffer)
       (message (concat "Starting: drush " command)))))
 
 (defun drush-msg-me (process event)
