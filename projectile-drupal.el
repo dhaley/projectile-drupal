@@ -37,6 +37,7 @@
 
 (require 'projectile)
 (require 'f)
+(require 'ggtags)
 
 (defgroup projectile-drupal nil
   "Drupal mode based on projectile"
@@ -1248,7 +1249,8 @@ PWD is not in a project"
 (defun projectile-drupal-on ()
   "Enable `projectile-drupal-mode' minor mode if this is a drupal project."
   (when (projectile-drupal-root)
-    (projectile-drupal-mode +1)))
+    (projectile-drupal-mode +1)
+    (ggtags-mode 1)))
 
 (defun projectile-drupal-off ()
   "Disable `projectile-drupal-mode' minor mode."
