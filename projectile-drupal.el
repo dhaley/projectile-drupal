@@ -45,7 +45,7 @@
   :group 'projectile)
 
 (defcustom projectile-drupal-site-name-function
-  'projectile-drupal-site-name
+  'projectile-drupal-site-name-default-function
   "Function to set projectile-drupal-site-name.
 This is used by the `projectile-drupal-drush-uli-to-string', `', and
 `' commands."
@@ -209,13 +209,6 @@ Include path to the executable if it is not in your $PATH."
   (interactive)
   (find-file
    projectile-drupal-profile-directory))
-
-(defun dkh-get-site-name ()
-  "Gets site name based on dslm standard."
-  (let* ((project-root-dir (locate-dominating-file default-directory
-                                                   "current"))
-         (path (split-string project-root-dir "/")))     ; path as list
-              (car (last (nbutlast path 1)))))
 
 (defun projectile-drupal-setup ()
   "Sets up local and global project variables "
