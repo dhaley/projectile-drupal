@@ -290,6 +290,22 @@ Include path to the executable if it is not in your $PATH."
                 projectile-drupal-profile-name
                 "/modules/contrib"))
 
+  (setq-local ag-arguments (append '("--ignore" "'*#'"
+                               ;; "--ignore" "'*.js'"
+                               ;; "--ignore" "'*.xml'"
+                               ;; "--ignore" "'*.log'"
+                               ;; "--ignore" "'*.sql'"
+                               ;; "--ignore" "'*.txt'"
+                               ;; "--ignore" "'*.json'"
+                               ;; "--ignore" "'*.yaml'"
+                               "--ignore" "TAGS"
+                               "--ignore" "GPATH"
+                               "--ignore" "GRTAGS"
+                               "--ignore" "GTAGS"
+                               "--ignore-dir" "'contrib'")
+                             ag-arguments))
+
+
   (setenv "8dr" projectile-drupal-readme-file-name)
   (setenv "8ds" (projectile-project-root))
   (setenv "DRUPAL_ROOT" (projectile-project-root))

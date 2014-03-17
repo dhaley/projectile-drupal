@@ -13,7 +13,14 @@ With Projectile Drupal you are able to:
 - have project environment variables available in emacs shells such as *eshell*
 - run drush --uli
 
+This minor mode is also meant as a companion mode to the minor mode [[https://github.com/arnested/drupal-mode][drupal-mode]], which is the
+mode you'll want to actually edit drupal php files.  It does not attempt to
+duplicate any of the functionality found in drupal-mode or [[https://github.com/ejmr/php-mode][php-mode]].
+
 * Setup
+** Prerequisites
+
+This package requires at least emacs 24.3 because of the use of setq-local.
 
 ** Installation
 
