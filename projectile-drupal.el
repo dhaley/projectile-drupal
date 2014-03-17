@@ -306,10 +306,10 @@ Include path to the executable if it is not in your $PATH."
                                "--ignore" "GPATH"
                                "--ignore" "GRTAGS"
                                "--ignore" "GTAGS"
-                               "--ignore-dir" "'contrib'")
+                               "--ignore-dir" "modules/contrib")
                              ag-arguments))
 
-  (setq-local ag-project-root-function (quote projectile-drupal-get-profile-directory) )
+  (setq-local ag-project-root-function (quote projectile-drupal-get-profile-directory))
 
   (setenv "8dr" projectile-drupal-readme-file-name)
   (setenv "8ds" (projectile-project-root))
@@ -1169,6 +1169,7 @@ PWD is not in a project"
       (define-key map (kbd "p") 'projectile-drupal-find-profile-directory)
       (define-key map (kbd "e") 'projectile-drupal-drush-uli-to-string)
       (define-key map (kbd "v") 'projectile-drupal-drush-version)
+      (define-key map (kbd "A") 'ag-project)
 
     map)
   "A goto map for `projectile-drupal-mode'."
