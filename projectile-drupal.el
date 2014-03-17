@@ -210,6 +210,10 @@ Include path to the executable if it is not in your $PATH."
   (find-file
    projectile-drupal-profile-directory))
 
+(defun projectile-drupal-get-profile-directory (file-path)
+  "Return projectile-drupal-profile-directory."
+  (cd projectile-drupal-profile-directory))
+
 (defun projectile-drupal-setup ()
   "Sets up local and global project variables "
 
@@ -305,6 +309,7 @@ Include path to the executable if it is not in your $PATH."
                                "--ignore-dir" "'contrib'")
                              ag-arguments))
 
+  (setq-local ag-project-root-function (quote projectile-drupal-get-profile-directory) )
 
   (setenv "8dr" projectile-drupal-readme-file-name)
   (setenv "8ds" (projectile-project-root))
