@@ -322,8 +322,54 @@ Include path to the executable if it is not in your $PATH."
   (add-to-list 'projectile-globally-ignored-directories
                "libraries")
 
-  ;; (projectile-globally-ignored-files (quote ("TAGS" ".gitignore" ".gitmodules" ".htaccess" "authorize.php" "cron.php" "install.php" "robots.txt" "update.php" "xmlrpc.php" "web.config" "GTAGS" "GRTAGS" "GPATH")))
- ;; '(projectile-project-root-files (quote (".projectile" ".git" ".hg" ".fslckout" ".bzr" "_darcs" "rebar.config" "project.clj" "pom.xml" "build.sbt" "Gemfile" "Makefile")))
+  (add-to-list 'projectile-globally-ignored-directories
+               (concat
+                (projectile-project-root)
+               "modules"))
+
+  (add-to-list 'projectile-globally-ignored-directories
+               "includes")
+
+  (add-to-list 'projectile-globally-ignored-directories
+               "misc")
+
+  (add-to-list 'projectile-globally-ignored-directories
+               "scripts")
+
+  (add-to-list 'projectile-globally-ignored-directories
+               (concat
+                (projectile-project-root)
+               "themes"))
+
+  (add-to-list 'projectile-globally-ignored-directories
+                "profiles/minimal")
+
+  (add-to-list 'projectile-globally-ignored-directories
+                "profiles/standard")
+
+  (add-to-list 'projectile-globally-ignored-directories
+                "profiles/testing")
+
+  (add-to-list 'projectile-globally-ignored-directories
+                "profiles/cu_fit/themes")
+
+
+  (setq projectile-globally-ignored-files (quote ("TAGS" ".gitignore" ".gitmodules" ".htaccess" "authorize.php" "cron.php" "install.php" "robots.txt" "update.php" "xmlrpc.php" "web.config" "GTAGS" "GRTAGS" "GPATH" "index.php")))
+
+  (add-to-list 'projectile-globally-ignored-files
+               (concat
+                "profiles/"
+                projectile-drupal-profile-name
+                "/"
+                ".gitmodules"))
+
+  (add-to-list 'projectile-globally-ignored-files
+               (concat
+                "profiles/"
+                projectile-drupal-profile-name
+                "/"
+                "CHANGELOG.txt"))
+
 
   (setq-local ag-arguments (append '("--ignore" "'*#'"
                                ;; "--ignore" "'*.js'"
