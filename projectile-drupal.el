@@ -54,6 +54,16 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
           (function :tag "Your own function"))
   :group 'projectile-drupal)
 
+(defcustom projectile-drupal-base-url-function
+    'projectile-drupal-base-url-default-function
+  "Function to set projectile-drupal-base-url.
+This is used by the `browse-url', `', and
+`' commands."
+  :type '(choice
+          (function-item :tag "default" :value  projectile-drupal-base-url-default-function)
+          (function :tag "Your own function"))
+  :group 'projectile-drupal)
+
 (defcustom projectile-drupal-expand-snippet t
   "If not nil newly created buffers will be pre-filled with class skeleton.")
 
@@ -72,10 +82,13 @@ Include path to the executable if it is not in your $PATH."
   :link '(url-link :tag "Drush" "https://github.com/drush-ops/drush")
   :group 'drupal-drush)
 
-
 (make-variable-buffer-local
  (defvar projectile-drupal-site-name "My Drupal Site"
    "Site name used for drush --uli function + others"))
+
+(make-variable-buffer-local
+ (defvar projectile-drupal-base-url "http://localhost:8888"
+   "Drupal base path used for `browse-url` functions."))
 
 (make-variable-buffer-local
  (defvar projectile-drupal-readme-file-name
@@ -155,6 +168,10 @@ Include path to the executable if it is not in your $PATH."
   "My Drupal Site"
   )
 
+(defun projectile-drupal-base-url-default-function ()
+    "http://localhost:8888")
+
+
 (defun projectile-drupal-find-readme ()
   (interactive)
   (find-file projectile-drupal-readme-file-name))
@@ -218,6 +235,8 @@ Include path to the executable if it is not in your $PATH."
   "Sets up local and global project variables "
 
   (setq projectile-drupal-site-name (funcall projectile-drupal-site-name-function))
+
+  (setq projectile-drupal-base-url (funcall projectile-drupal-base-url-function))
 
   (setq
    projectile-drupal-readme-file-name (concat (projectile-project-root) "README.md")
@@ -326,7 +345,6 @@ Include path to the executable if it is not in your $PATH."
 
   ;; browse drupal menus from emacs
   (setq
-   base_url (concat "http://ww/" projectile-drupal-site-name)
    d7-menus '("admin" "batch" "gsearch" "home" "navigation404" "node"
               "rss.xml" "shortcodes" "user" "block/%" "degree/%" "media/%" "node/%"
               "overlay-ajax/%" "user/%" "wysiwyg/%" "about-us/fast-facts"
@@ -933,15 +951,10 @@ Include path to the executable if it is not in your $PATH."
   " Provide dynamically derived uri for drush uli"
   (interactive)
   (cd (projectile-project-root))
-  (let* ((uri
-          (if (equal projectile-drupal-site-name "admissions_undergraduate")
-              "ww/admissions/undergraduate"
-            (concat "ww/" projectile-drupal-site-name)))
-         (kill-new (shell-command-to-string (concat
-                                             "drush --uri="
-                                             uri
-                                             " uli"))))
-    (message (concat "Visiting " uri))))
+  (kill-new (shell-command-to-string (concat
+                                      "drush uli --uri="
+                                      projectile-drupal-base-url)))
+    (message (concat "Visiting " projectile-drupal-base-url)))
 
 (defun projectile-drupal-drush-version ()
   (interactive)
@@ -1141,7 +1154,7 @@ PWD is not in a project"
   "browse specific menu path on drupal site"
   (interactive)
   (let ((menu (completing-read "Browse: " d7-menus)))
-    (browse-url (concat base_url "/" menu))))
+    (browse-url (concat projectile-drupal-base-url "/" menu))))
 
 (defun projectile-drupal-root ()
   "Returns drupal root directory if this file is a part of a Drupal application else nil"
