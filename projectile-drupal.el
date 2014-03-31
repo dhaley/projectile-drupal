@@ -313,6 +313,18 @@ Include path to the executable if it is not in your $PATH."
                 projectile-drupal-profile-name
                 "/modules/contrib"))
 
+  (add-to-list 'projectile-globally-ignored-directories
+               "sites/default/files")
+
+  (add-to-list 'projectile-globally-ignored-directories
+               "FirePHPCore")
+
+  (add-to-list 'projectile-globally-ignored-directories
+               "libraries")
+
+  ;; (projectile-globally-ignored-files (quote ("TAGS" ".gitignore" ".gitmodules" ".htaccess" "authorize.php" "cron.php" "install.php" "robots.txt" "update.php" "xmlrpc.php" "web.config" "GTAGS" "GRTAGS" "GPATH")))
+ ;; '(projectile-project-root-files (quote (".projectile" ".git" ".hg" ".fslckout" ".bzr" "_darcs" "rebar.config" "project.clj" "pom.xml" "build.sbt" "Gemfile" "Makefile")))
+
   (setq-local ag-arguments (append '("--ignore" "'*#'"
                                ;; "--ignore" "'*.js'"
                                ;; "--ignore" "'*.xml'"
