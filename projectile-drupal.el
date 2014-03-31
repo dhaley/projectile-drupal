@@ -948,7 +948,7 @@ Include path to the executable if it is not in your $PATH."
 
 
 (defun projectile-drupal-drush-uli-to-string ()
-  " Provide dynamically derived uri for drush uli"
+  "Provide dynamically derived uri for drush uli."
   (interactive)
   (cd (projectile-project-root))
   (kill-new (shell-command-to-string (concat
