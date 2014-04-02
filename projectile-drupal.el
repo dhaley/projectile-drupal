@@ -75,6 +75,7 @@ This is used by the `browse-url', `', and
 (defmacro projectile-drupal-with-root (body-form)
   `(let ((default-directory (projectile-drupal-root)))
      ,body-form))
+
 (defcustom drupal-drush-program (executable-find "drush")
   "Name of the Drush executable.
 Include path to the executable if it is not in your $PATH."
