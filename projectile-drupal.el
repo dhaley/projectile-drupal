@@ -83,6 +83,26 @@ Include path to the executable if it is not in your $PATH."
   :link '(url-link :tag "Drush" "https://github.com/drush-ops/drush")
   :group 'drupal-drush)
 
+(defcustom projectile-drupal-site-base-url-prod "prod"
+  "URL of the prod site instance"
+  :group 'projectile-drupal
+  :type '(string))
+
+(defcustom projectile-drupal-site-base-url-stage "stage"
+  "URL of the stage site instance"
+  :group 'projectile-drupal
+  :type 'string)
+
+(defcustom projectile-drupal-site-base-url-dev "dev"
+       "URL of the dev site instance"
+       :type '(string)
+       :group 'projectile-drupal)
+
+(defcustom projectile-drupal-site-base-url-test "test"
+  "URL of the test site instance"
+  :group 'projectile-drupal
+  :type 'string)
+
 (make-variable-buffer-local
  (defvar projectile-drupal-site-name "My Drupal Site"
    "Site name used for drush --uli function + others"))
@@ -973,38 +993,34 @@ Include path to the executable if it is not in your $PATH."
               "admin/config/media/file-types/manage/%/groups/%/delete"
               "admin/config/media/image-styles/edit/%/effects/%/delete")))
 
-(defun projectile-drupal-choose-cu-site (env site)
+(defun projectile-drupal-choose-site (env site)
   "env & URL"
-  (cond
-   ((equal env "prod")
-    (browse-url (concat "http://www.colorado.edu/" site)))
-   ((equal env "stage"))
-   ((equal env "stage")
-    (browse-url (concat "http://www-stage.colorado.edu/" site)))
-   ((equal env "dev")
-    (browse-url (concat "http://www-dev.colorado.edu/" site)))
-   ((equal env "test")
-    (browse-url (concat "http://www-test.colorado.edu/" site)))))
+   (let ()
+    (cond
+     ((equal env "prod")
+      (browse-url (concat projectile-drupal-site-base-url-prod "/" site)))
+     ((equal env "stage")
+      (browse-url (concat projectile-drupal-site-base-url-stage "/" site)))
+     ((equal env "dev")
+      (browse-url (concat projectile-drupal-site-base-url-dev "/" site)))
+     ((equal env "test")
+      (browse-url (concat projectile-drupal-site-base-url-test "/" site))))))
 
-(defun projectile-drupal-choose-cu-site-prod (site)
-  (interactive "sSite: ")
-  (projectile-drupal-choose-cu-site "prod" site))
+(defun projectile-drupal-choose-site-prod ()
+  (interactive
+   (projectile-drupal-choose-site "prod" projectile-drupal-site-name)))
 
+(defun projectile-drupal-choose-site-test ()
+  (interactive
+   (projectile-drupal-choose-site "test" projectile-drupal-site-name)))
 
-(defun projectile-drupal-choose-cu-site-stage (site)
-  (interactive "sSite: ")
-  (projectile-drupal-choose-cu-site "stage" site))
+(defun projectile-drupal-choose-site-stage ()
+  (interactive
+   (projectile-drupal-choose-site "stage" projectile-drupal-site-name)))
 
-
-(defun projectile-drupal-choose-cu-site-dev (site)
-  (interactive "sSite: ")
-  (projectile-drupal-choose-cu-site "dev" site))
-
-
-(defun projectile-drupal-choose-cu-site-test (site)
-  (interactive "sSite: ")
-  (projectile-drupal-choose-cu-site "test" site))
-
+(defun projectile-drupal-choose-site-dev ()
+  (interactive
+   (projectile-drupal-choose-site "dev" projectile-drupal-site-name)))
 
 (defun projectile-drupal-drush-uli-to-string ()
   "Provide dynamically derived uri for drush uli."
@@ -1267,10 +1283,10 @@ PWD is not in a project"
       (define-key prefix-map (kbd "rp") 'projectile-drupal-drush-rsync-prod)
       (define-key prefix-map (kbd "rs") 'projectile-drupal-drush-rsync-stage)
       (define-key prefix-map (kbd "rd") 'projectile-drupal-drush-rsync-dev)
-      (define-key prefix-map (kbd "bp") 'projectile-drupal-choose-cu-site-prod)
-      (define-key prefix-map (kbd "bs") 'projectile-drupal-choose-cu-site-stage)
-      (define-key prefix-map (kbd "bd") 'projectile-drupal-choose-cu-site-dev)
-      (define-key prefix-map (kbd "bt") 'projectile-drupal-choose-cu-site-test)
+      (define-key prefix-map (kbd "bp") 'projectile-drupal-choose-site-prod)
+      (define-key prefix-map (kbd "bs") 'projectile-drupal-choose-site-stage)
+      (define-key prefix-map (kbd "bd") 'projectile-drupal-choose-site-dev)
+      (define-key prefix-map (kbd "bt") 'projectile-drupal-choose-site-test)
       (define-key prefix-map (kbd "d") projectile-drupal-mode-goto-map)
       (define-key map projectile-drupal-keymap-prefix prefix-map))
     map)
@@ -1316,10 +1332,10 @@ PWD is not in a project"
     ["Drush rsync from stage to local" projectile-drupal-drush-rsync-stage]
     ["Drush rsync from dev to local" projectile-drupal-drush-rsync-dev]
     "--"
-    ["Open prod site in browser" projectile-drupal-choose-cu-site-prod]
-    ["Open stage site in browser" projectile-drupal-choose-cu-site-stage]
-    ["Open dev site in browser" projectile-drupal-choose-cu-site-dev]
-    ["Open test site in browser" projectile-drupal-choose-cu-site-test]))
+    ["Open prod site in browser" projectile-drupal-choose-site-prod]
+    ["Open stage site in browser" projectile-drupal-choose-site-stage]
+    ["Open dev site in browser" projectile-drupal-choose-site-dev]
+    ["Open test site in browser" projectile-drupal-choose-site-test]))
 
 ;;;###autoload
 (define-minor-mode projectile-drupal-mode
