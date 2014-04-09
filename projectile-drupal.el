@@ -67,7 +67,7 @@ This is used by the `browse-url', `', and
 (defcustom projectile-drupal-expand-snippet t
   "If not nil newly created buffers will be pre-filled with class skeleton.")
 
-(defcustom projectile-drupal-keymap-prefix (kbd "C-8")
+(defcustom projectile-drupal-keymap-prefix (kbd "C-c .")
   "`projectile-drupal-mode' keymap prefix."
   :group 'projectile-drupal
   :type 'string)
