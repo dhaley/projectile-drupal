@@ -37,7 +37,6 @@
 
 (require 'projectile)
 (require 'f)
-(require 'ggtags)
 
 (defgroup projectile-drupal nil
   "Drupal mode based on projectile"
@@ -404,6 +403,7 @@ Include path to the executable if it is not in your $PATH."
                                "--ignore-dir" "modules/contrib")
                              ag-arguments))
 
+  ;; pretty much want to always set ag base at profile level.
   (setq-local ag-project-root-function (quote projectile-drupal-get-profile-directory))
 
   (setenv "8dr" projectile-drupal-readme-file-name)
@@ -1349,8 +1349,7 @@ PWD is not in a project"
 (defun projectile-drupal-on ()
   "Enable `projectile-drupal-mode' minor mode if this is a drupal project."
   (when (projectile-drupal-root)
-    (projectile-drupal-mode +1)
-    (ggtags-mode 1)))
+    (projectile-drupal-mode +1)))
 
 (defun projectile-drupal-off ()
   "Disable `projectile-drupal-mode' minor mode."
