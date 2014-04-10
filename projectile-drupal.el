@@ -192,17 +192,14 @@ Include path to the executable if it is not in your $PATH."
 (defun projectile-drupal-base-url-default-function ()
     "http://localhost:8888")
 
-
 (defun projectile-drupal-find-readme ()
   (interactive)
   (find-file projectile-drupal-readme-file-name))
 
 (defun projectile-drupal-find-site-directory ()
-  (interactive)
   (interactive)(find-file (projectile-project-root)))
 
 (defun projectile-drupal-find-theme-directory ()
-  (interactive)
   (interactive)(find-file projectile-drupal-theme-directory))
 
 (defun projectile-drupal-find-module-directory ()
