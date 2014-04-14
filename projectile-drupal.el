@@ -54,7 +54,7 @@ This is used by the `projectile-drupal-drush-uli-to-string', `', and
   :group 'projectile-drupal)
 
 (defcustom projectile-drupal-base-url-function
-    'projectile-drupal-base-url-default-function
+  'projectile-drupal-base-url-default-function
   "Function to set projectile-drupal-base-url.
 This is used by the `browse-url', `', and
 `' commands."
@@ -93,9 +93,9 @@ Include path to the executable if it is not in your $PATH."
   :type 'string)
 
 (defcustom projectile-drupal-site-base-url-dev "dev"
-       "URL of the dev site instance"
-       :type '(string)
-       :group 'projectile-drupal)
+  "URL of the dev site instance"
+  :type '(string)
+  :group 'projectile-drupal)
 
 (defcustom projectile-drupal-site-base-url-test "test"
   "URL of the test site instance"
@@ -189,7 +189,7 @@ Include path to the executable if it is not in your $PATH."
   )
 
 (defun projectile-drupal-base-url-default-function ()
-    "http://localhost:8888")
+  "http://localhost:8888")
 
 (defun projectile-drupal-find-readme ()
   (interactive)
@@ -258,32 +258,32 @@ Include path to the executable if it is not in your $PATH."
   (setq
    projectile-drupal-readme-file-name (concat (projectile-project-root) "README.md")
    projectile-drupal-profile-name (curr-dir-project-string
-                           (projectile-project-root)
-                           projectile-drupal-site-name)
+                                   (projectile-project-root)
+                                   projectile-drupal-site-name)
    projectile-drupal-sites-all-directory (concat
-                                  (projectile-project-root)
-                                  "sites/all"))
+                                          (projectile-project-root)
+                                          "sites/all"))
   ;; if there's a profile dir
   (if (and projectile-drupal-profile-name (file-exists-p (concat
-                                                  (projectile-project-root)
-                                                  "profiles/"
-                                                  projectile-drupal-profile-name)))
+                                                          (projectile-project-root)
+                                                          "profiles/"
+                                                          projectile-drupal-profile-name)))
       (progn
         (setq
          projectile-drupal-profile-directory (concat
-                                      (projectile-project-root)
-                                      "profiles/"
-                                      projectile-drupal-profile-name)
+                                              (projectile-project-root)
+                                              "profiles/"
+                                              projectile-drupal-profile-name)
          projectile-drupal-module-directory (concat
-                                     projectile-drupal-profile-directory
-                                     "/modules")
+                                             projectile-drupal-profile-directory
+                                             "/modules")
          projectile-drupal-theme-directory (concat
-                                    projectile-drupal-profile-directory
-                                    "/themes")
-         projectile-drupal-default-theme-directory (concat
                                             projectile-drupal-profile-directory
-                                            "/themes/"
-                                            projectile-drupal-profile-name))
+                                            "/themes")
+         projectile-drupal-default-theme-directory (concat
+                                                    projectile-drupal-profile-directory
+                                                    "/themes/"
+                                                    projectile-drupal-profile-name))
         (setenv "8dt" projectile-drupal-default-theme-directory)
 
 
@@ -291,32 +291,32 @@ Include path to the executable if it is not in your $PATH."
         )
     (setq
      projectile-drupal-module-directory (concat
-                                 projectile-drupal-sites-all-directory
-                                 "/modules")
+                                         projectile-drupal-sites-all-directory
+                                         "/modules")
      projectile-drupal-theme-directory (concat
-                                projectile-drupal-sites-all-directory
-                                "/themes")))
+                                        projectile-drupal-sites-all-directory
+                                        "/themes")))
 
   ;; set up the rest of global vars after determining profile parameters
   (setq
    projectile-drupal-feature-directory (concat
-                                projectile-drupal-module-directory
-                                "/features")
+                                        projectile-drupal-module-directory
+                                        "/features")
    projectile-drupal-contrib-directory (concat
-                                projectile-drupal-module-directory
-                                "/contrib")
+                                        projectile-drupal-module-directory
+                                        "/contrib")
 
    projectile-drupal-custom-directory (concat
-                               projectile-drupal-module-directory
-                               "/custom")
+                                       projectile-drupal-module-directory
+                                       "/custom")
    projectile-drupal-default-directory (concat
-                                (projectile-project-root) "sites/default")
+                                        (projectile-project-root) "sites/default")
    projectile-drupal-settings-file-name (concat
-                                 projectile-drupal-default-directory
-                                 "/settings.php")
+                                         projectile-drupal-default-directory
+                                         "/settings.php")
    projectile-drupal-settings-local-file-name (concat
-                                       projectile-drupal-default-directory
-                                       "/settings.local.php")
+                                               projectile-drupal-default-directory
+                                               "/settings.local.php")
                                         ; let's set up drush aliases
    projectile-drupal-local-alias (concat "@cu.local-" projectile-drupal-site-name)
    projectile-drupal-dev-alias (concat "@cu.wwebdev1-" projectile-drupal-site-name)
@@ -342,7 +342,7 @@ Include path to the executable if it is not in your $PATH."
   (add-to-list 'projectile-globally-ignored-directories
                (concat
                 (projectile-project-root)
-               "modules"))
+                "modules"))
 
   (add-to-list 'projectile-globally-ignored-directories
                "includes")
@@ -356,19 +356,19 @@ Include path to the executable if it is not in your $PATH."
   (add-to-list 'projectile-globally-ignored-directories
                (concat
                 (projectile-project-root)
-               "themes"))
+                "themes"))
 
   (add-to-list 'projectile-globally-ignored-directories
-                "profiles/minimal")
+               "profiles/minimal")
 
   (add-to-list 'projectile-globally-ignored-directories
-                "profiles/standard")
+               "profiles/standard")
 
   (add-to-list 'projectile-globally-ignored-directories
-                "profiles/testing")
+               "profiles/testing")
 
   (add-to-list 'projectile-globally-ignored-directories
-                "profiles/cu_fit/themes")
+               "profiles/cu_fit/themes")
 
 
   (setq projectile-globally-ignored-files (quote ("TAGS" ".gitignore" ".gitmodules" ".htaccess" "authorize.php" "cron.php" "install.php" "robots.txt" "update.php" "xmlrpc.php" "web.config" "GTAGS" "GRTAGS" "GPATH" "index.php")))
@@ -407,6 +407,10 @@ Include path to the executable if it is not in your $PATH."
 
   ;; pretty much want to always set ag base at profile level.
   (setq-local ag-project-root-function (quote projectile-drupal-get-profile-directory))
+
+  ;; (setq-local projectile-project-root-files (append `(" ") projectile-project-root-files))
+
+  ;; (setq-local projectile-project-root-files-functions (append projectile-drupal-root projectile-project-root-files-functions))
 
   (setenv "8dr" projectile-drupal-readme-file-name)
   (setenv "8ds" (projectile-project-root))
@@ -994,7 +998,7 @@ Include path to the executable if it is not in your $PATH."
 
 (defun projectile-drupal-choose-site (env site)
   "env & URL"
-   (let ()
+  (let ()
     (cond
      ((equal env "prod")
       (browse-url (concat projectile-drupal-site-base-url-prod "/" site)))
@@ -1028,7 +1032,7 @@ Include path to the executable if it is not in your $PATH."
   (kill-new (shell-command-to-string (concat
                                       "drush uli --uri="
                                       projectile-drupal-base-url)))
-    (message (concat "Visiting " projectile-drupal-base-url)))
+  (message (concat "Visiting " projectile-drupal-base-url)))
 
 (defun projectile-drupal-drush-version ()
   (interactive)
@@ -1237,30 +1241,30 @@ PWD is not in a project"
    (and
     (file-exists-p (projectile-expand-root "includes/common.inc"))
     (file-exists-p (projectile-expand-root "includes/bootstrap.inc")))
-(projectile-project-root)))
+   (projectile-project-root)))
 
 (defvar projectile-drupal-mode-goto-map
   (let ((map (make-sparse-keymap)))
-      (define-key map (kbd "r") 'projectile-drupal-find-readme)
-      (define-key map (kbd "s") 'projectile-drupal-find-site-directory)
-      (define-key map (kbd "T") 'projectile-drupal-find-theme-directory)
-      (define-key map (kbd "m") 'projectile-drupal-find-module-directory)
-      (define-key map (kbd "c") 'projectile-drupal-find-custom-directory)
-      (define-key map (kbd "f") 'projectile-drupal-find-feature-directory)
-      (define-key map (kbd "d") 'projectile-drupal-find-default-directory)
-      (define-key map (kbd "a") 'projectile-drupal-find-sites-all-directory)
-      (define-key map (kbd "S") 'projectile-drupal-find-settings-file-name)
-      (define-key map (kbd "l") 'projectile-drupal-find-settings-local-file-name)
-      (define-key map (kbd "b") 'projectile-drupal-find-contrib-directory)
-      (define-key map (kbd "t") 'projectile-drupal-find-profile-theme-directory)
-      (define-key map (kbd "p") 'projectile-drupal-find-profile-directory)
-      (define-key map (kbd "e") 'projectile-drupal-drush-uli-to-string)
-      (define-key map (kbd "v") 'projectile-drupal-drush-version)
-      (define-key map (kbd "A") 'ag-project)
+    (define-key map (kbd "r") 'projectile-drupal-find-readme)
+    (define-key map (kbd "s") 'projectile-drupal-find-site-directory)
+    (define-key map (kbd "T") 'projectile-drupal-find-theme-directory)
+    (define-key map (kbd "m") 'projectile-drupal-find-module-directory)
+    (define-key map (kbd "c") 'projectile-drupal-find-custom-directory)
+    (define-key map (kbd "f") 'projectile-drupal-find-feature-directory)
+    (define-key map (kbd "d") 'projectile-drupal-find-default-directory)
+    (define-key map (kbd "a") 'projectile-drupal-find-sites-all-directory)
+    (define-key map (kbd "S") 'projectile-drupal-find-settings-file-name)
+    (define-key map (kbd "l") 'projectile-drupal-find-settings-local-file-name)
+    (define-key map (kbd "b") 'projectile-drupal-find-contrib-directory)
+    (define-key map (kbd "t") 'projectile-drupal-find-profile-theme-directory)
+    (define-key map (kbd "p") 'projectile-drupal-find-profile-directory)
+    (define-key map (kbd "e") 'projectile-drupal-drush-uli-to-string)
+    (define-key map (kbd "v") 'projectile-drupal-drush-version)
+    (define-key map (kbd "A") 'ag-project)
 
     map)
   "A goto map for `projectile-drupal-mode'."
-)
+  )
 
 (defvar projectile-drupal-mode-map
   (let ((map (make-sparse-keymap)))
@@ -1345,7 +1349,7 @@ PWD is not in a project"
     ;; (and projectile-drupal-expand-snippet (projectile-drupal-expand-snippet-maybe))
     ;; specify buffer-local-variables
     (projectile-drupal-setup)
-))
+    ))
 
 ;;;###autoload
 (defun projectile-drupal-on ()
