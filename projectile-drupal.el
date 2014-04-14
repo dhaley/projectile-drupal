@@ -408,10 +408,6 @@ Include path to the executable if it is not in your $PATH."
   ;; pretty much want to always set ag base at profile level.
   (setq-local ag-project-root-function (quote projectile-drupal-get-profile-directory))
 
-  ;; (setq-local projectile-project-root-files (append `(" ") projectile-project-root-files))
-
-  ;; (setq-local projectile-project-root-files-functions (append projectile-drupal-root projectile-project-root-files-functions))
-
   (setenv "8dr" projectile-drupal-readme-file-name)
   (setenv "8ds" (projectile-project-root))
   (setenv "DRUPAL_ROOT" (projectile-project-root))
