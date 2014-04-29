@@ -997,13 +997,13 @@ Include path to the executable if it is not in your $PATH."
   (let ()
     (cond
      ((equal env "prod")
-      (browse-url (concat projectile-drupal-site-base-url-prod "/" site)))
+      (browse-url (concat projectile-drupal-site-base-url-prod "/" site "/user")))
      ((equal env "stage")
-      (browse-url (concat projectile-drupal-site-base-url-stage "/" site)))
+      (browse-url (concat projectile-drupal-site-base-url-stage "/" site "/user")))
      ((equal env "dev")
-      (browse-url (concat projectile-drupal-site-base-url-dev "/" site)))
+      (browse-url (concat projectile-drupal-site-base-url-dev "/" site "/user")))
      ((equal env "test")
-      (browse-url (concat projectile-drupal-site-base-url-test "/" site))))))
+      (browse-url (concat projectile-drupal-site-base-url-test "/" site "/user"))))))
 
 (defun projectile-drupal-choose-site-prod ()
   (interactive
