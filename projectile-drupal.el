@@ -388,22 +388,23 @@ Include path to the executable if it is not in your $PATH."
                 "CHANGELOG.txt"))
 
 
-  (setq-local ag-arguments (append `("--ignore" "'*#'"
-                                     ;; "--ignore" "'*.js'"
-                                     ;; "--ignore" "'*.xml'"
-                                     ;; "--ignore" "'*.log'"
-                                     ;; "--ignore" "'*.sql'"
-                                     ;; "--ignore" "'*.txt'"
-                                     ;; "--ignore" "'*.json'"
-                                     ;; "--ignore" "'*.yaml'"
-                                     "--ignore" "TAGS"
-                                     "--ignore" "GPATH"
-                                     "--ignore" "GRTAGS"
-                                     "--ignore" "GTAGS"
-                                     "--ignore-dir" ,(concat
-                                                      "profiles/"
-                                                      projectile-drupal-profile-name "/modules/contrib*"))
-                                   ag-arguments))
+  ;; this needs to check if ag exists first
+  ;; (setq-local ag-arguments (append `("--ignore" "'*#'"
+  ;;                                    ;; "--ignore" "'*.js'"
+  ;;                                    ;; "--ignore" "'*.xml'"
+  ;;                                    ;; "--ignore" "'*.log'"
+  ;;                                    ;; "--ignore" "'*.sql'"
+  ;;                                    ;; "--ignore" "'*.txt'"
+  ;;                                    ;; "--ignore" "'*.json'"
+  ;;                                    ;; "--ignore" "'*.yaml'"
+  ;;                                    "--ignore" "TAGS"
+  ;;                                    "--ignore" "GPATH"
+  ;;                                    "--ignore" "GRTAGS"
+  ;;                                    "--ignore" "GTAGS"
+  ;;                                    "--ignore-dir" ,(concat
+  ;;                                                     "profiles/"
+  ;;                                                     projectile-drupal-profile-name "/modules/contrib*"))
+  ;;                                  ag-arguments))
 
   ;; pretty much want to always set ag base at profile level.
   (setq-local ag-project-root-function (quote projectile-drupal-get-profile-directory))
